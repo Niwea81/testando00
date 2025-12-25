@@ -148,5 +148,52 @@ function atualizarGrafico() {
 
 window.onload = atualizarGrafico;
 
+function definirExpectativa(botao, tipo) {
+  document
+    .querySelectorAll("#feedbackCamada4, .option-btn")
+    .forEach(el => el.classList?.remove("active"));
+
+  botao.classList.add("active");
+
+  const feedback = document.getElementById("feedbackCamada4");
+  feedback.style.display = "block";
+
+  if (tipo === "direcional") {
+    feedback.innerHTML = `
+      <b>🎯 Leitura Direcional</b><br><br>
+      • Você espera deslocamento do preço<br>
+      • Normalmente alinhado com tendência clara<br>
+      • Exige timing, convicção e stop bem definido<br><br>
+
+      <b>📘 Para iniciantes:</b><br>
+      Direcional erra mais, mas quando acerta paga melhor.
+    `;
+  }
+
+  if (tipo === "neutro") {
+    feedback.innerHTML = `
+      <b>🧲 Leitura Neutra</b><br><br>
+      • Você não espera grande movimento<br>
+      • Foco em tempo e estatística<br>
+      • Requer controle de risco e disciplina<br><br>
+
+      <b>📘 Para iniciantes:</b><br>
+      Neutro costuma ter maior taxa de acerto, mas exige gestão.
+    `;
+  }
+
+  if (tipo === "indefinido") {
+    feedback.innerHTML = `
+      <b>❓ Falta de Convicção</b><br><br>
+      • Mercado confuso ou leitura incompleta<br>
+      • Melhor cenário para observar e aprender<br><br>
+
+      <b>📘 Para iniciantes:</b><br>
+      Não operar também é uma decisão profissional.
+    `;
+  }
+}
+
+
 
 
