@@ -71,3 +71,27 @@ button:hover {
   }
 }
 
+/* ===== Ajuste visual Camada 4 — Direcional x Neutro ===== */
+
+.options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.option-btn {
+  padding: 10px 14px;
+  min-width: 180px;
+  max-width: 240px;
+  line-height: 1.25;
+  font-size: 14px;
+}
+
+.option-btn span {
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+
