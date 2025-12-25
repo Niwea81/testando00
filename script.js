@@ -1,53 +1,48 @@
-function avaliarVIX(){
-  const vix = document.getElementById("vixRange").value;
-  const label = document.getElementById("vixLabel");
+const vixSlider = document.getElementById("vix");
+const vixValue = document.getElementById("vixValue");
 
-  let nivel = "baixo";
-  if(vix >= 20 && vix < 30) nivel = "moderado";
-  if(vix >= 30) nivel = "alto";
+vixSlider.addEventListener("input", () => {
+  vixValue.textContent = vixSlider.value;
+});
 
-  label.innerHTML = `VIX atual percebido: <b>${vix}</b> (${nivel})`;
-
-  atualizarFeedbackMacro();
-}
-
-function avaliarAgenda(){
-  atualizarFeedbackMacro();
-}
-
-function avaliarEvento(){
-  atualizarFeedbackMacro();
-}
-
-function atualizarFeedbackMacro(){
-  const agenda = document.getElementById("agendaImpacto").value;
-  const evento = document.getElementById("diaEvento").value;
-  const feedback = document.getElementById("feedbackMacro");
+function avaliarContexto() {
+  const vix = Number(vixSlider.value);
+  const agenda = document.getElementById("agenda").value;
+  const perfil = document.getElementById("perfil").value;
+  const evento = document.querySelector('input[name="evento"]:checked').value;
 
   let mensagem = "";
+  let status = "✅ Contexto aceitável para análise técnica.";
 
-  if(agenda === "sim" || evento === "sim"){
-    mensagem = `
-      ⚠️ <b>Atenção ao Contexto Macro</b><br><br>
-      Eventos econômicos de alto impacto (★★★), como CPI, FOMC ou Payroll,
-      podem aumentar a volatilidade de forma imprevisível.<br><br>
-      👉 Para operadores iniciantes, isso pode significar:<br>
-      • Spreads mais abertos<br>
-      • Stops sendo atingidos rapidamente<br>
-      • Movimentos bruscos mesmo após o evento<br><br>
-      💡 Considere reduzir tamanho, usar estruturas defensivas
-      ou até mesmo <b>não operar</b> hoje.
-    `;
-  } else {
-    mensagem = `
-      ✅ <b>Contexto Macro Neutro</b><br><br>
-      Não há eventos de alto impacto identificados.<br>
-      O ambiente tende a ser mais previsível, o que é
-      mais adequado para estudo e execução consciente de opções.
-    `;
+  // Regras do VIX
+  if (vix >= 30) {
+    mensagem += "⚠️ VIX elevado indica alta volatilidade.\n";
+    if (perfil === "iniciante") {
+      status = "⛔ Trade bloqueado para iniciantes em VIX alto.";
+    }
   }
 
-  feedback.innerHTML = mensagem;
-  feedback.style.display = "block";
-}
+  // Agenda econômica
+  if (agenda === "alto") {
+    mensagem += "⚠️ Agenda com eventos de alto impacto.\n";
+    if (perfil === "iniciante") {
+      status = "⛔ Evite operar em dias de notícias ⭐⭐⭐.";
+    }
+  }
 
+  // Evento crítico
+  if (evento === "sim") {
+    mensagem += "⚠️ Evento macro relevante hoje.\n";
+    if (perfil !== "avancado") {
+      status = "⛔ Trade desaconselhado fora de estratégias específicas.";
+    }
+  }
+
+  // Mensagem educativa
+  if (perfil === "iniciante") {
+    mensagem += "\n📘 Nota educativa:\nEventos macro podem gerar movimentos imprevisíveis mesmo após a divulgação.";
+  }
+
+  document.getElementById("resultado").innerText =
+    mensagem + "\n\n" + status;
+}
