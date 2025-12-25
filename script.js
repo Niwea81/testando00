@@ -62,3 +62,33 @@ function avaliarContexto() {
   document.getElementById("resultado").innerText =
     mensagem + "\n\n" + status;
 }
+
+function avaliarTecnico() {
+  const estrutura = document.getElementById("estrutura").value;
+  const vwap = document.getElementById("vwap").value;
+  const volatilidade = document.getElementById("volatilidade").value;
+  const distancia = document.getElementById("distancia").value;
+
+  let msg = "";
+  let status = "✅ Estrutura técnica favorável.";
+
+  if (estrutura === "indefinicao") {
+    status = "⛔ Estrutura indefinida — risco elevado.";
+  }
+
+  if (estrutura === "tendencia" && distancia === "esticada") {
+    msg += "⚠️ Tendência esticada — risco de pullback.\n";
+  }
+
+  if (estrutura === "range" && volatilidade === "expansao") {
+    msg += "⚠️ Possível rompimento ou falso rompimento.\n";
+  }
+
+  if (vwap === "emcima") {
+    msg += "ℹ️ Preço sobre VWAP indica zona neutra.\n";
+  }
+
+  document.getElementById("resultadoTecnico").innerText =
+    msg + "\n" + status;
+}
+
