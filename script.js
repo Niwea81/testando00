@@ -194,6 +194,57 @@ function definirExpectativa(botao, tipo) {
   }
 }
 
+function selecionarEstrutura(btn, tipo) {
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  let msg = "";
+
+  if (tipo === "movimento") {
+    msg = `
+      <b>📈 Acompanhamento de movimento</b><br><br>
+      • Funciona melhor em mercados direcionais<br>
+      • Sensível à volatilidade<br>
+      • Exige bom timing de entrada<br><br>
+      <b>⚠️ Iniciantes:</b> movimentos contra podem gerar perdas rápidas.
+    `;
+  }
+
+  if (tipo === "controlado") {
+    msg = `
+      <b>🧩 Movimento controlado</b><br><br>
+      • Ideal quando há direção, mas com risco reduzido<br>
+      • Menor impacto emocional<br>
+      • Boa para aprendizado estrutural<br><br>
+      <b>📘 Dica:</b> muito usada por traders consistentes.
+    `;
+  }
+
+  if (tipo === "lateral") {
+    msg = `
+      <b>🟨 Preço lateral / parado</b><br><br>
+      • Mercado sem tendência clara<br>
+      • Volatilidade elevada favorece<br>
+      • Ganho vem do tempo, não do movimento<br><br>
+      <b>⚠️ Atenção:</b> rompimentos causam ajustes.
+    `;
+  }
+
+  if (tipo === "defesa") {
+    msg = `
+      <b>🛡️ Proteção / Defesa</b><br><br>
+      • Foco em reduzir risco<br>
+      • Pode proteger carteira ou operação aberta<br>
+      • Muito usada por profissionais<br><br>
+      <b>📘 Educação:</b> defesa também é estratégia.
+    `;
+  }
+
+  const box = document.getElementById("feedbackCamada5");
+  box.style.display = "block";
+  box.innerHTML = msg;
+}
+
 
 
 
