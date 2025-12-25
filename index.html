@@ -60,16 +60,8 @@
     Não pense em opções ainda. Apenas descreva o que você vê.
   </p>
 
-  <h3>📌 Qual a estrutura predominante?</h3>
-
-  <div class="options">
-    <button class="option-btn" onclick="estruturaMercado(this,'alta')">📈 Tendência de Alta</button>
-    <button class="option-btn" onclick="estruturaMercado(this,'baixa')">📉 Tendência de Baixa</button>
-    <button class="option-btn" onclick="estruturaMercado(this,'range')">📊 Consolidação / Range</button>
-    <button class="option-btn" onclick="estruturaMercado(this,'indefinido')">❓ Indefinido</button>
-  </div>
-
-  <h3 style="margin-top:25px">📐 O preço está reagindo a linhas de tendência?</h3>
+  <!-- 🔽 BLOCO MOVIDO PARA AQUI -->
+  <h3>📐 O preço está reagindo a linhas de tendência?</h3>
 
   <p style="color:#94a3b8;font-size:14px">
     Considere toques recentes e claros em linhas de tendência ou canais.
@@ -92,8 +84,19 @@
     • Se não estiver claro, marque <b>Indefinido</b>
   </div>
 
+  <!-- 🔽 BOTÕES DE ESTRUTURA -->
+  <h3 style="margin-top:25px">📌 Qual a estrutura predominante?</h3>
+
+  <div class="options">
+    <button class="option-btn" onclick="estruturaMercado(this,'alta')">📈 Tendência de Alta</button>
+    <button class="option-btn" onclick="estruturaMercado(this,'baixa')">📉 Tendência de Baixa</button>
+    <button class="option-btn" onclick="estruturaMercado(this,'range')">📊 Consolidação / Range</button>
+    <button class="option-btn" onclick="estruturaMercado(this,'indefinido')">❓ Indefinido</button>
+  </div>
+
   <div id="feedbackCamada2" class="guided" style="display:none"></div>
 </div>
+
 
 </body>
 </html>
