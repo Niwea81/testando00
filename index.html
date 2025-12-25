@@ -202,6 +202,42 @@
   <div id="feedbackCamada4" class="guided" style="display:none"></div>
 </div>
 
+<!-- ================= CAMADA 5 — SELEÇÃO DE ESTRUTURA ================= -->
+
+<div class="section">
+  <h2>5️⃣ Tipo de estrutura desejada</h2>
+
+  <p style="color:#94a3b8;font-size:15px">
+    👉 Agora não pense em CALL ou PUT.  
+    Pense apenas <b>no comportamento do preço</b> que você espera.
+  </p>
+
+  <div class="options">
+    <button class="option-btn" onclick="selecionarEstrutura(this,'movimento')">
+      📈 Acompanhamento de movimento
+      <span>Preço tende a andar a favor</span>
+    </button>
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'controlado')">
+      🧩 Movimento controlado
+      <span>Quero risco e ganho limitados</span>
+    </button>
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'lateral')">
+      🟨 Preço lateral / parado
+      <span>Mercado deve ficar em range</span>
+    </button>
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'defesa')">
+      🛡️ Proteção / Defesa
+      <span>Reduzir risco ou proteger posição</span>
+    </button>
+  </div>
+
+  <div id="feedbackCamada5" class="guided" style="display:none"></div>
+</div>
+
+
 
 
 </body>
