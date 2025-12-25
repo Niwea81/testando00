@@ -4,21 +4,20 @@
   <meta charset="UTF-8">
   <title>Checklist de Trade – Camada 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <h1>1️⃣ CONTEXTO MACRO – Primeiro Filtro</h1>
 
-  <!-- VIX -->
   <section>
     <h3>Força do VIX</h3>
     <input type="range" id="vix" min="10" max="40" value="20">
     <p>VIX atual: <span id="vixValue">20</span></p>
   </section>
 
-  <!-- Agenda Econômica -->
   <section>
-    <h3>Agenda Econômica (Impacto)</h3>
+    <h3>Agenda Econômica</h3>
     <select id="agenda">
       <option value="baixo">Baixo impacto ⭐</option>
       <option value="medio">Médio impacto ⭐⭐</option>
@@ -26,14 +25,13 @@
     </select>
   </section>
 
-  <!-- Evento Importante -->
-  <section>
-    <h3>Evento relevante hoje?</h3>
-    <label><input type="radio" name="evento" value="sim"> Sim (CPI / FOMC / Payroll)</label><br>
-    <label><input type="radio" name="evento" value="nao" checked> Não</label>
+  <section class="eventos">
+    <h3>Eventos macro hoje</h3>
+    <label><input type="checkbox" id="cpi"> CPI</label>
+    <label><input type="checkbox" id="fomc"> FOMC</label>
+    <label><input type="checkbox" id="payroll"> Payroll</label>
   </section>
 
-  <!-- Perfil -->
   <section>
     <h3>Seu nível de experiência</h3>
     <select id="perfil">
@@ -43,10 +41,7 @@
     </select>
   </section>
 
-  <br>
   <button onclick="avaliarContexto()">Avaliar Contexto</button>
-
-  <hr>
 
   <h2>Resultado</h2>
   <p id="resultado"></p>
