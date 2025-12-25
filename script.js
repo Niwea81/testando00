@@ -123,3 +123,15 @@ function estruturaMercado(btn, tipo) {
   }
 }
 
+function atualizarGrafico() {
+  const ativo = document.getElementById("ativo").value;
+
+  const url = `https://s.tradingview.com/widgetembed/?symbol=${ativo}&interval=D&hidetoptoolbar=1&hidesidetoolbar=1&theme=dark`;
+
+  document.getElementById("tv").src = url;
+}
+
+// carrega gráfico inicial ao abrir o site
+window.onload = atualizarGrafico;
+
+
