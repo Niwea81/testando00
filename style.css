@@ -59,3 +59,15 @@ button:hover {
   border: 1px solid #334155;
 }
 
+.vol-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 800px) {
+  .vol-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
