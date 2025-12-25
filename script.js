@@ -92,3 +92,44 @@ function avaliarTecnico() {
     msg + "\n" + status;
 }
 
+function selecionarEstrutura(btn, tipo){
+  document
+    .querySelectorAll(".option-btn")
+    .forEach(b => b.classList.remove("active"));
+
+  btn.classList.add("active");
+
+  const box = document.getElementById("feedbackEstrutura");
+  box.style.display = "block";
+
+  const mensagens = {
+    alta: `
+      📈 <b>Tendência de Alta identificada</b><br><br>
+      Contexto geralmente mais favorável para:
+      • operações direcionais<br>
+      • estruturas que se beneficiam de continuidade<br><br>
+      ⚠️ Ainda não é hora de escolher estratégia.
+    `,
+    baixa: `
+      📉 <b>Tendência de Baixa identificada</b><br><br>
+      Cuidado com compras impulsivas.
+      • mercados em queda exigem controle emocional<br><br>
+      ⚠️ Aguarde confirmação nas próximas camadas.
+    `,
+    range: `
+      📊 <b>Mercado em consolidação</b><br><br>
+      • Direcional costuma falhar<br>
+      • Falsos rompimentos são comuns<br><br>
+      ⚠️ Muitos traders perdem dinheiro em range sem saber.
+    `,
+    indefinido: `
+      ⛔ <b>Estrutura indefinida</b><br><br>
+      Para iniciantes, esse é o pior cenário possível.<br>
+      📘 Profissionais esperam definição antes de operar.
+    `
+  };
+
+  box.innerHTML = mensagens[tipo];
+}
+
+
