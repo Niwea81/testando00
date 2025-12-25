@@ -10,28 +10,47 @@
   <h1>1️⃣ CONTEXTO MACRO – Primeiro Filtro</h1>
 
   <!-- VIX -->
-<section class="section" id="camada1-macro">
-  <h2>1️⃣ Contexto Macro do Dia</h2>
+  <section>
+    <h3>Força do VIX</h3>
+    <input type="range" id="vix" min="10" max="40" value="20">
+    <p>VIX atual: <span id="vixValue">20</span></p>
+  </section>
 
-  <label>📉 Nível do VIX (percepção de risco do mercado)</label>
-  <input type="range" min="10" max="40" value="18" id="vixRange" oninput="avaliarVIX()">
-  <p id="vixLabel">VIX atual percebido: <b>18</b> (baixo)</p>
+  <!-- Agenda Econômica -->
+  <section>
+    <h3>Agenda Econômica (Impacto)</h3>
+    <select id="agenda">
+      <option value="baixo">Baixo impacto ⭐</option>
+      <option value="medio">Médio impacto ⭐⭐</option>
+      <option value="alto">Alto impacto ⭐⭐⭐</option>
+    </select>
+  </section>
 
-  <label>📅 Existe evento econômico de <b>alto impacto (★★★)</b> hoje?</label>
-  <select id="agendaImpacto" onchange="avaliarAgenda()">
-    <option value="">Selecione</option>
-    <option value="nao">Não</option>
-    <option value="sim">Sim</option>
-  </select>
+  <!-- Evento Importante -->
+  <section>
+    <h3>Evento relevante hoje?</h3>
+    <label><input type="radio" name="evento" value="sim"> Sim (CPI / FOMC / Payroll)</label><br>
+    <label><input type="radio" name="evento" value="nao" checked> Não</label>
+  </section>
 
-  <label>⚠️ Hoje é dia de evento como CPI, FOMC ou Payroll?</label>
-  <select id="diaEvento" onchange="avaliarEvento()">
-    <option value="">Selecione</option>
-    <option value="nao">Não</option>
-    <option value="sim">Sim</option>
-  </select>
+  <!-- Perfil -->
+  <section>
+    <h3>Seu nível de experiência</h3>
+    <select id="perfil">
+      <option value="iniciante">Iniciante</option>
+      <option value="intermediario">Intermediário</option>
+      <option value="avancado">Avançado</option>
+    </select>
+  </section>
 
-  <div id="feedbackMacro" class="note" style="display:none"></div>
-</section>
+  <br>
+  <button onclick="avaliarContexto()">Avaliar Contexto</button>
 
+  <hr>
 
+  <h2>Resultado</h2>
+  <p id="resultado"></p>
+
+  <script src="script.js"></script>
+</body>
+</html>
