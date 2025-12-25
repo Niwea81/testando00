@@ -166,6 +166,43 @@
   </div>
 </div>
 
+<!-- ================= CAMADA 4 — DIRECIONAL × NEUTRO ================= -->
+
+<div class="section">
+  <h2>4️⃣ Expectativa de Movimento</h2>
+
+  <p style="color:#94a3b8;font-size:15px">
+    👉 Agora responda com sinceridade:  
+    você espera que o <b>preço se desloque</b> ou apenas que ele <b>permaneça dentro de uma faixa</b>?
+  </p>
+
+  <div class="options">
+    <button class="option-btn" onclick="definirExpectativa(this,'direcional')">
+      🎯 Direcional<br>
+      <span style="font-size:13px;color:#94a3b8">
+        Espero movimento claro de alta ou baixa
+      </span>
+    </button>
+
+    <button class="option-btn" onclick="definirExpectativa(this,'neutro')">
+      🧲 Neutro<br>
+      <span style="font-size:13px;color:#94a3b8">
+        Espero que o preço fique dentro de um range
+      </span>
+    </button>
+
+    <button class="option-btn" onclick="definirExpectativa(this,'indefinido')">
+      ❓ Indefinido<br>
+      <span style="font-size:13px;color:#94a3b8">
+        Não tenho convicção suficiente
+      </span>
+    </button>
+  </div>
+
+  <div id="feedbackCamada4" class="guided" style="display:none"></div>
+</div>
+
+
 
 </body>
 </html>
