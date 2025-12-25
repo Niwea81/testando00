@@ -93,3 +93,41 @@
 <h2>Resultado Técnico</h2>
 <p id="resultadoTecnico"></p>
 
+<!-- ================= CAMADA 2 — CONTEXTO TÉCNICO ================= -->
+
+<div class="section">
+  <h2>2️⃣ Estrutura atual do mercado</h2>
+
+  <p style="color:#94a3b8;font-size:15px">
+    👉 <b>Olhe o gráfico do ativo</b> primeiro no <b>Diário</b> e depois no <b>4 horas</b>.  
+    Não pense em opções ainda. Apenas descreva o mercado.
+  </p>
+
+  <div class="options">
+    <button class="option-btn" onclick="selecionarEstrutura(this,'alta')">
+      📈 Tendência de Alta
+    </button>
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'baixa')">
+      📉 Tendência de Baixa
+    </button>
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'range')">
+      📊 Range / Consolidação
+    </button>
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'indefinido')">
+      ❓ Indefinido / Transição
+    </button>
+  </div>
+
+  <div class="note">
+    <b>📘 Para iniciantes:</b><br>
+    • Se o Diário mostra uma coisa e o 4H outra, marque <b>Indefinido</b><br>
+    • Mercado indefinido é onde a maioria perde dinheiro<br>
+    • Esperar também é uma decisão profissional
+  </div>
+
+  <div id="feedbackEstrutura" class="guided" style="display:none"></div>
+</div>
+
