@@ -49,3 +49,47 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+<h1>2️⃣ CONTEXTO TÉCNICO – Estrutura de Preço</h1>
+
+<section>
+  <h3>Estrutura atual do mercado</h3>
+  <select id="estrutura">
+    <option value="tendencia">Tendência</option>
+    <option value="range">Range / Consolidação</option>
+    <option value="indefinicao">Indefinição / Transição</option>
+  </select>
+</section>
+
+<section>
+  <h3>Preço em relação ao VWAP</h3>
+  <select id="vwap">
+    <option value="acima">Acima do VWAP</option>
+    <option value="abaixo">Abaixo do VWAP</option>
+    <option value="emcima">Muito próximo do VWAP</option>
+  </select>
+</section>
+
+<section>
+  <h3>Comportamento do mercado</h3>
+  <select id="volatilidade">
+    <option value="expansao">Expansão</option>
+    <option value="contracao">Contração</option>
+    <option value="irregular">Irregular</option>
+  </select>
+</section>
+
+<section>
+  <h3>Distância do preço para o VWAP</h3>
+  <select id="distancia">
+    <option value="curta">Curta</option>
+    <option value="media">Média</option>
+    <option value="esticada">Muito esticada</option>
+  </select>
+</section>
+
+<button onclick="avaliarTecnico()">Avaliar Contexto Técnico</button>
+
+<h2>Resultado Técnico</h2>
+<p id="resultadoTecnico"></p>
+
