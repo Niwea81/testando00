@@ -134,4 +134,19 @@ function atualizarGrafico() {
 // carrega gráfico inicial ao abrir o site
 window.onload = atualizarGrafico;
 
+function atualizarGrafico() {
+  const ativo = document.getElementById("ativo").value;
+
+  // Gráfico do ativo (Camada 2)
+  const ativoUrl = `https://s.tradingview.com/widgetembed/?symbol=${ativo}&interval=D&theme=dark`;
+  document.getElementById("tv").src = ativoUrl;
+
+  // Gráfico do VIX (Camada 3)
+  const vixUrl = `https://s.tradingview.com/widgetembed/?symbol=VIX&interval=D&theme=dark`;
+  document.getElementById("vixChart").src = vixUrl;
+}
+
+window.onload = atualizarGrafico;
+
+
 
