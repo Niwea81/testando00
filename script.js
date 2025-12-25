@@ -63,5 +63,63 @@ function avaliarContexto() {
     mensagem + "\n\n" + status;
 }
 
-function estruturaMercado
+// ================= CAMADA 2 — ESTRUTURA DO MERCADO =================
+
+function estruturaMercado(btn, tipo) {
+
+  // Remove seleção anterior
+  document
+    .querySelectorAll(".option-btn")
+    .forEach(b => b.classList.remove("active"));
+
+  // Ativa botão atual
+  btn.classList.add("active");
+
+  // Leitura dos checkboxes
+  const diario = document.getElementById("toqueDiario")?.checked;
+  const h4 = document.getElementById("toque4h")?.checked;
+
+  let confirmacao = "";
+
+  if (diario && h4) {
+    confirmacao = "✔️ Diário e 4H confirmam reação técnica.";
+  } else if (diario || h4) {
+    confirmacao = "⚠️ Apenas um timeframe confirma.";
+  } else {
+    confirmacao = "⛔ Nenhuma reação técnica clara.";
+  }
+
+  const mensagens = {
+    alta: `
+      📈 <b>Tendência de Alta</b><br><br>
+      Topos e fundos ascendentes.<br>
+      ${confirmacao}<br><br>
+      📘 Iniciante: operar a favor da tendência reduz erros.
+    `,
+    baixa: `
+      📉 <b>Tendência de Baixa</b><br><br>
+      Topos e fundos descendentes.<br>
+      ${confirmacao}<br><br>
+      📘 Iniciante: cuidado com compras contra o fluxo.
+    `,
+    range: `
+      📊 <b>Consolidação / Range</b><br><br>
+      Mercado sem direção definida.<br>
+      ${confirmacao}<br><br>
+      📘 Iniciante: direcional costuma falhar aqui.
+    `,
+    indefinido: `
+      ❓ <b>Estrutura indefinida</b><br><br>
+      Mercado em transição ou confuso.<br>
+      ${confirmacao}<br><br>
+      📘 Profissionais aguardam clareza.
+    `
+  };
+
+  const box = document.getElementById("feedbackCamada2");
+  if (box) {
+    box.style.display = "block";
+    box.innerHTML = mensagens[tipo];
+  }
+}
 
