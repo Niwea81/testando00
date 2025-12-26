@@ -365,6 +365,10 @@ function selecionarEstrutura(btn, tipo) {
 /* ================================
    GERA CADEIA EDUCACIONAL
 ================================ */
+function selecionarEstrutura(btn, tipo) {
+  limparBotoes(btn.parentElement);
+  btn.classList.add("active");
+  
 function gerarCadeiaEducacional() {
   const preco = parseFloat(document.getElementById("precoAtivo")?.value || 31);
   const strikes = [];
@@ -417,6 +421,10 @@ function gerarCadeiaEducacional() {
 /* ================================
    FUNÇÕES PLACEHOLDER
 ================================ */
+  function selecionarEstrutura(btn, tipo) {
+  limparBotoes(btn.parentElement);
+  btn.classList.add("active");
+    
 function selecionarPremio() { return; }
 function decisaoBase() { return; }
 
