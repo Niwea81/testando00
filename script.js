@@ -326,14 +326,14 @@ function selecionarPremio(btn,valor){
   document.getElementById("blocoEstrutura").style.display = "block";
 }
 
-function selecionarEstrutura(btn,tipo){
+function selecionarEstrutura(btn, tipo) {
   limparBotoes(btn.parentElement);
   btn.classList.add("active");
 
   const alerta = document.getElementById("alertasEstrutura");
   alerta.style.display = "block";
 
-  if(tipo==="simples"){
+  if (tipo === "simples") {
     alerta.innerHTML = `
       📍 <b>Posição simples</b><br>
       • Pode ter risco ilimitado se vendida<br>
@@ -341,7 +341,7 @@ function selecionarEstrutura(btn,tipo){
     `;
   }
 
-  if(tipo==="spread"){
+  if (tipo === "spread") {
     alerta.innerHTML = `
       🧩 <b>Spread</b><br>
       ✔️ Risco limitado<br>
@@ -349,20 +349,24 @@ function selecionarEstrutura(btn,tipo){
     `;
   }
 
-  if(tipo==="coberta"){
+  if (tipo === "coberta") {
     alerta.innerHTML = `
       🛡️ <b>Estrutura coberta</b><br>
       ✔️ Exige ativo em carteira<br>
       ✔️ Reduz risco
     `;
   }
+}
 
- function gerarCadeiaEducacional(){
+/* ================================
+   GERA CADEIA EDUCACIONAL
+================================ */
+function gerarCadeiaEducacional() {
   const preco = parseFloat(document.getElementById("precoAtivo")?.value || 31);
   const strikes = [];
 
-  for(let i=-6;i<=6;i++){
-    strikes.push((preco + i*0.25).toFixed(2));
+  for (let i = -6; i <= 6; i++) {
+    strikes.push((preco + i * 0.25).toFixed(2));
   }
 
   const calls = document.getElementById("callsCol");
@@ -373,14 +377,14 @@ function selecionarEstrutura(btn,tipo){
   puts.innerHTML  = "";
   mid.innerHTML   = "";
 
-  strikes.forEach(s=>{
+  strikes.forEach(s => {
     let classe = "otm";
-    if(parseFloat(s) === parseFloat(preco.toFixed(2))) classe="atm";
-    if(parseFloat(s) < preco) classe="itm";
+    if (parseFloat(s) === parseFloat(preco.toFixed(2))) classe = "atm";
+    if (parseFloat(s) < preco) classe = "itm";
 
     calls.innerHTML += `
       <div class="option-row ${classe}">
-        <spanI>${(Math.random()*4).toFixed(2)}M</span>
+        <span>${(Math.random()*4).toFixed(2)}M</span>
         <span>${(Math.random()*0.7).toFixed(2)}</span>
         <span>${(Math.random()*2).toFixed(2)}</span>
         <span>${(Math.random()*2.5).toFixed(2)}</span>
@@ -400,15 +404,17 @@ function selecionarEstrutura(btn,tipo){
         <span>-${(Math.random()*0.7).toFixed(2)}</span>
         <span>${(Math.random()*4).toFixed(2)}M</span>
       </div>
-   `;
-  }
+    `;
+  });
 
   document.getElementById("gradeOpcoes").style.display = "block";
- }
+}
 
-  function selecionarPremio(){ return; }
-function decisaoBase(){ return; }
-
+/* ================================
+   FUNÇÕES PLACEHOLDER
+================================ */
+function selecionarPremio() { return; }
+function decisaoBase() { return; }
 
 
 
