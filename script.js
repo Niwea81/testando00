@@ -18,6 +18,8 @@ function avaliarContexto() {
   const cpi = document.getElementById("cpi").checked;
   const fomc = document.getElementById("fomc").checked;
   const payroll = document.getElementById("payroll").checked;
+     }
+  }
 
   let mensagem = "";
   let status = "✅ Contexto macro aceitável para avançar.";
@@ -283,7 +285,8 @@ function gerarCadeiaEducacional() {
         <span>${(Math.random()*2.5).toFixed(2)}</span>
       </div>
     `;
-  });
+     }
+  }
 
   document.getElementById("gradeOpcoes").style.display = "block";
 }
@@ -296,7 +299,7 @@ function selecionarPremio(){ return; }
 function decisaoBase(){ return; }
 
 function decisaoBase() { return; }
+    }
   }
-
 
 
