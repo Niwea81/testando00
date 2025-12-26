@@ -245,6 +245,54 @@ function selecionarEstrutura(btn, tipo) {
   box.innerHTML = msg;
 }
 
+function decisaoBase(btn, tipo) {
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  let alerta = "";
+
+  if (tipo === "comprar") {
+    alerta = `
+      🟢 <b>Posição comprada</b><br>
+      • Risco limitado ao valor investido<br>
+      • Sensível ao tempo e volatilidade<br>
+      • Perdas são conhecidas desde a entrada
+    `;
+  }
+
+  if (tipo === "vender") {
+    alerta = `
+      🔴 <b>Posição vendida</b><br>
+      ⚠️ Pode ter <b>risco ilimitado</b><br>
+      ⚠️ Exige margem<br>
+      ⚠️ Movimentos extremos podem gerar ajustes ou perdas relevantes
+    `;
+  }
+
+  if (tipo === "spread") {
+    alerta = `
+      🧩 <b>Estrutura em Spread</b><br>
+      • Risco e ganho limitados<br>
+      • Consome menos margem<br>
+      • Muito usada por traders com contas menores
+    `;
+  }
+
+  if (tipo === "coberta") {
+    alerta = `
+      🛡️ <b>Estrutura Coberta</b><br>
+      ⚠️ Exige posse do ativo<br>
+      • Reduz risco direcional<br>
+      • Limita ganhos em troca de proteção
+    `;
+  }
+
+  const box = document.getElementById("alertasCamada5");
+  box.style.display = "block";
+  box.innerHTML = alerta;
+}
+
+
 
 
 
