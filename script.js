@@ -327,7 +327,6 @@ function selecionarPremio(btn,valor){
       Continue observando o contexto.
     `;
   }
-
   document.getElementById("blocoEstrutura").style.display = "block";
 }
 
