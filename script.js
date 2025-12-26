@@ -403,7 +403,12 @@ function selecionarEstrutura(btn,tipo){
    `;
   }
 
-  document.getElementById("gradeOpcoes").style.display = "block";}
+  document.getElementById("gradeOpcoes").style.display = "block";
+ }
+
+  function selecionarPremio(){ return; }
+function decisaoBase(){ return; }
+
 
 
 
