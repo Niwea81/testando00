@@ -305,37 +305,47 @@
   </div>
 
   <!-- GRADE EDUCACIONAL -->
-  <div id="gradeOpcoes" style="display:none;margin-top:30px">
+ <div id="gradeOpcoes" style="display:none;margin-top:30px">
 
-    <h3>🧠 Visual educacional — Moneyness</h3>
+  <h3>🧠 Cadeia de Opções — Visual Profissional</h3>
 
-    <p style="color:#94a3b8;font-size:14px">
-      Isto é apenas <b>educacional</b>. Serve para entender ITM / ATM / OTM.
-    </p>
+  <p style="color:#94a3b8;font-size:14px">
+    Visual educacional inspirado em corretoras reais.<br>
+    Serve para entender <b>Calls × Puts × Strike × Moneyness</b>.
+  </p>
 
-    <table class="option-chain">
-      <thead>
-        <tr>
-          <th colspan="3">PUT</th>
-          <th>STRIKE</th>
-          <th colspan="3">CALL</th>
-        </tr>
-        <tr>
-          <th>Bid</th><th>Ask</th><th></th>
-          <th></th>
-          <th></th><th>Bid</th><th>Ask</th>
-        </tr>
-      </thead>
-      <tbody id="cadeiaOpcoes"></tbody>
-    </table>
+  <div class="option-grid">
 
-    <div class="legend">
-      🟢 ITM &nbsp; 🟡 ATM &nbsp; 🔵 OTM
+    <!-- CALLS -->
+    <div class="side calls">
+      <div class="header">CALLS</div>
+      <div class="row-labels">
+        <span>OI</span><span>Δ</span><span>Bid</span><span>Ask</span>
+      </div>
+      <div id="callsCol"></div>
     </div>
+
+    <!-- STRIKE -->
+    <div class="side strikes">
+      <div class="header">STRIKE</div>
+      <div id="strikeCol"></div>
+    </div>
+
+    <!-- PUTS -->
+    <div class="side puts">
+      <div class="header">PUTS</div>
+      <div class="row-labels">
+        <span>Bid</span><span>Ask</span><span>Δ</span><span>OI</span>
+      </div>
+      <div id="putsCol"></div>
+    </div>
+
   </div>
 
+  <div class="legend">
+    🟢 ITM &nbsp;&nbsp; 🟡 ATM &nbsp;&nbsp; 🔵 OTM
+  </div>
 </div>
-
 
 
 
