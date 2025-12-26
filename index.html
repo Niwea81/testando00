@@ -237,6 +237,33 @@
   <div id="feedbackCamada5" class="guided" style="display:none"></div>
 </div>
 
+<h3 style="margin-top:25px">🔍 Antes de escolher o strike</h3>
+
+<div class="options">
+  <button class="option-btn" onclick="decisaoBase(this,'comprar')">
+    🟢 Comprar posição
+    <span>Risco limitado ao valor pago</span>
+  </button>
+
+  <button class="option-btn" onclick="decisaoBase(this,'vender')">
+    🔴 Vender posição
+    <span>Exige margem • Pode ter risco elevado</span>
+  </button>
+
+  <button class="option-btn" onclick="decisaoBase(this,'spread')">
+    🧩 Estrutura em Spread
+    <span>Risco limitado • Ideal para contas menores</span>
+  </button>
+
+  <button class="option-btn" onclick="decisaoBase(this,'coberta')">
+    🛡️ Estrutura Coberta
+    <span>Exige ativo em carteira</span>
+  </button>
+</div>
+
+<div id="alertasCamada5" class="note" style="display:none"></div>
+
+
 
 
 
