@@ -400,12 +400,11 @@ function selecionarEstrutura(btn,tipo){
         <span>-${(Math.random()*0.7).toFixed(2)}</span>
         <span>${(Math.random()*4).toFixed(2)}M</span>
       </div>
-    `;
-  });
+   `;
+  }
 
- document.getElementById("gradeOpcoes").style.display = "block";
+  document.getElementById("gradeOpcoes").style.display = "block";
 }
-
 
 
 
