@@ -5,11 +5,6 @@ vixSlider.addEventListener("input", () => {
   vixValue.textContent = vixSlider.value;
 });
 
-function limparBotoes(container) {
-  const botoes = container.querySelectorAll("button");
-  botoes.forEach(btn => btn.classList.remove("active"));
-}
-
 function avaliarContexto() {
   const vix = Number(vixSlider.value);
   const agenda = document.getElementById("agenda").value;
@@ -18,8 +13,6 @@ function avaliarContexto() {
   const cpi = document.getElementById("cpi").checked;
   const fomc = document.getElementById("fomc").checked;
   const payroll = document.getElementById("payroll").checked;
-     }
-  }
 
   let mensagem = "";
   let status = "✅ Contexto macro aceitável para avançar.";
@@ -202,13 +195,145 @@ function definirExpectativa(botao, tipo) {
 }
 
 function selecionarEstrutura(btn, tipo) {
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  let msg = "";
+
+  if (tipo === "movimento") {
+    msg = `
+      <b>📈 Acompanhamento de movimento</b><br><br>
+      • Funciona melhor em mercados direcionais<br>
+      • Sensível à volatilidade<br>
+      • Exige bom timing de entrada<br><br>
+      <b>⚠️ Iniciantes:</b> movimentos contra podem gerar perdas rápidas.
+    `;
+  }
+
+  if (tipo === "controlado") {
+    msg = `
+      <b>🧩 Movimento controlado</b><br><br>
+      • Ideal quando há direção, mas com risco reduzido<br>
+      • Menor impacto emocional<br>
+      • Boa para aprendizado estrutural<br><br>
+      <b>📘 Dica:</b> muito usada por traders consistentes.
+    `;
+  }
+
+  if (tipo === "lateral") {
+    msg = `
+      <b>🟨 Preço lateral / parado</b><br><br>
+      • Mercado sem tendência clara<br>
+      • Volatilidade elevada favorece<br>
+      • Ganho vem do tempo, não do movimento<br><br>
+      <b>⚠️ Atenção:</b> rompimentos causam ajustes.
+    `;
+  }
+
+  if (tipo === "defesa") {
+    msg = `
+      <b>🛡️ Proteção / Defesa</b><br><br>
+      • Foco em reduzir risco<br>
+      • Pode proteger carteira ou operação aberta<br>
+      • Muito usada por profissionais<br><br>
+      <b>📘 Educação:</b> defesa também é estratégia.
+    `;
+  }
+
+  const box = document.getElementById("feedbackCamada5");
+  box.style.display = "block";
+  box.innerHTML = msg;
+}
+
+function decisaoBase(btn, tipo) {
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  let alerta = "";
+
+  if (tipo === "comprar") {
+    alerta = `
+      🟢 <b>Posição comprada</b><br>
+      • Risco limitado ao valor investido<br>
+      • Sensível ao tempo e volatilidade<br>
+      • Perdas são conhecidas desde a entrada
+    `;
+  }
+
+  if (tipo === "vender") {
+    alerta = `
+      🔴 <b>Posição vendida</b><br>
+      ⚠️ Pode ter <b>risco ilimitado</b><br>
+      ⚠️ Exige margem<br>
+      ⚠️ Movimentos extremos podem gerar ajustes ou perdas relevantes
+    `;
+  }
+
+  if (tipo === "spread") {
+    alerta = `
+      🧩 <b>Estrutura em Spread</b><br>
+      • Risco e ganho limitados<br>
+      • Consome menos margem<br>
+      • Muito usada por traders com contas menores
+    `;
+  }
+
+  if (tipo === "coberta") {
+    alerta = `
+      🛡️ <b>Estrutura Coberta</b><br>
+      ⚠️ Exige posse do ativo<br>
+      • Reduz risco direcional<br>
+      • Limita ganhos em troca de proteção
+    `;
+  }
+
+  const box = document.getElementById("alertasCamada5");
+  box.style.display = "block";
+  box.innerHTML = alerta;
+}
+
+let tipoPremio = null;
+
+function selecionarPremio(btn,valor){
+  limparBotoes(btn.parentElement);
+  btn.classList.add("active");
+  tipoPremio = valor;
+
+  const box = document.getElementById("feedbackPremio");
+  box.style.display = "block";
+
+  if(valor==="comprar"){
+    box.innerHTML = `
+      🟢 <b>Comprar prêmio</b><br>
+      ✔️ Risco limitado<br>
+      ⚠️ O tempo trabalha contra você
+    `;
+  }
+  if(valor==="vender"){
+    box.innerHTML = `
+      🔴 <b>Vender prêmio</b><br>
+      ✔️ Probabilidade maior<br>
+      ⚠️ Pode exigir margem e controle de risco
+    `;
+  }
+  if(valor==="indefinido"){
+    box.innerHTML = `
+      ❓ Tudo bem não saber agora.<br>
+      Continue observando o contexto.
+    `;
+  }
+
+  document.getElementById("blocoEstrutura").style.display = "block";
+}
+
+function selecionarEstrutura(btn,tipo){
   limparBotoes(btn.parentElement);
   btn.classList.add("active");
 
   const alerta = document.getElementById("alertasEstrutura");
   alerta.style.display = "block";
 
-  if (tipo === "simples") {
+  if(tipo==="simples"){
     alerta.innerHTML = `
       📍 <b>Posição simples</b><br>
       • Pode ter risco ilimitado se vendida<br>
@@ -216,7 +341,7 @@ function selecionarEstrutura(btn, tipo) {
     `;
   }
 
-  if (tipo === "spread") {
+  if(tipo==="spread"){
     alerta.innerHTML = `
       🧩 <b>Spread</b><br>
       ✔️ Risco limitado<br>
@@ -224,7 +349,7 @@ function selecionarEstrutura(btn, tipo) {
     `;
   }
 
-  if (tipo === "coberta") {
+  if(tipo==="coberta"){
     alerta.innerHTML = `
       🛡️ <b>Estrutura coberta</b><br>
       ✔️ Exige ativo em carteira<br>
@@ -232,42 +357,31 @@ function selecionarEstrutura(btn, tipo) {
     `;
   }
 
-  // 👇 chama a grade educacional ao escolher estrutura
-  gerarCadeiaEducacional();
-}
-
-/* ===============================
-   GRADE EDUCACIONAL DE OPÇÕES
-================================ */
-
-function gerarCadeiaEducacional() {
-  const preco = parseFloat(
-    document.getElementById("precoAtivo")?.value || 31
-  );
-
+ function gerarCadeiaEducacional(){
+  const preco = parseFloat(document.getElementById("precoAtivo")?.value || 31);
   const strikes = [];
 
-  for (let i = -5; i <= 5; i++) {
-    strikes.push((preco + i * 0.5).toFixed(2));
+  for(let i=-6;i<=6;i++){
+    strikes.push((preco + i*0.25).toFixed(2));
   }
 
   const calls = document.getElementById("callsCol");
   const puts  = document.getElementById("putsCol");
   const mid   = document.getElementById("strikeCol");
 
-  if (!calls || !puts || !mid) return;
-
   calls.innerHTML = "";
   puts.innerHTML  = "";
   mid.innerHTML   = "";
 
-  strikes.forEach(s => {
+  strikes.forEach(s=>{
     let classe = "otm";
-    if (parseFloat(s) === parseFloat(preco.toFixed(2))) classe = "atm";
-    if (parseFloat(s) < preco) classe = "itm";
+    if(parseFloat(s) === parseFloat(preco.toFixed(2))) classe="atm";
+    if(parseFloat(s) < preco) classe="itm";
 
     calls.innerHTML += `
       <div class="option-row ${classe}">
+        <spanI>${(Math.random()*4).toFixed(2)}M</span>
+        <span>${(Math.random()*0.7).toFixed(2)}</span>
         <span>${(Math.random()*2).toFixed(2)}</span>
         <span>${(Math.random()*2.5).toFixed(2)}</span>
       </div>
@@ -283,23 +397,11 @@ function gerarCadeiaEducacional() {
       <div class="option-row ${classe}">
         <span>${(Math.random()*2).toFixed(2)}</span>
         <span>${(Math.random()*2.5).toFixed(2)}</span>
+        <span>-${(Math.random()*0.7).toFixed(2)}</span>
+        <span>${(Math.random()*4).toFixed(2)}M</span>
       </div>
     `;
-     }
-  }
+  });
 
-  document.getElementById("gradeOpcoes").style.display = "block";
+ document.getElementById("gradeOpcoes").style.display = "block";
 }
-
-/* ===============================
-   FUNÇÕES PLACEHOLDER
-================================ */
-
-function selecionarPremio(){ return; }
-function decisaoBase(){ return; }
-
-function decisaoBase() { return; }
-    }
-  }
-
-
