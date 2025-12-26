@@ -5,6 +5,11 @@ vixSlider.addEventListener("input", () => {
   vixValue.textContent = vixSlider.value;
 });
 
+function limparBotoes(container) {
+  const botoes = container.querySelectorAll("button");
+  botoes.forEach(btn => btn.classList.remove("active"));
+}
+
 function avaliarContexto() {
   const vix = Number(vixSlider.value);
   const agenda = document.getElementById("agenda").value;
