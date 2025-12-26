@@ -1,111 +1,96 @@
-/***********************
- * UTILIDADE GLOBAL
- ***********************/
-function limparBotoes(classe) {
-  document.querySelectorAll("." + classe).forEach(btn => {
-    btn.classList.remove("ativo");
-  });
+/********************************
+ * UTILIDADES GERAIS
+ ********************************/
+function limparBotoes(container) {
+  if (!container) return;
+  container.querySelectorAll("button").forEach(b =>
+    b.classList.remove("active", "ativo")
+  );
 }
 
-/***********************
+/********************************
  * ESTADO GLOBAL
- ***********************/
+ ********************************/
 const estado = {
-  camada1: {
-    ativo: null,
-    timeframe: "D",
-    confirmado: false
-  },
-  camada2: {
-    estrutura: null,
-    confirmado: false
-  }
+  ativo: "SPY",
+  estrutura: null,
+  expectativa: null
 };
 
-/***********************
+/********************************
  * CAMADA 1 — CONTEXTO
- ***********************/
-function selecionarAtivo(btn, ativo) {
-  limparBotoes("btn-ativo");
-  btn.classList.add("ativo");
-
-  estado.camada1.ativo = ativo;
-  estado.camada1.confirmado = false;
-
-  atualizarResumo();
+ ********************************/
+function avaliarContexto() {
+  // função chamada no HTML (não pode faltar)
+  console.log("Contexto avaliado");
 }
 
-function selecionarTimeframe(btn, tf) {
-  limparBotoes("btn-tf");
-  btn.classList.add("ativo");
+/********************************
+ * CAMADA 2 — ESTRUTURA DE MERCADO
+ ********************************/
+function estruturaMercado(btn, tipo) {
+  limparBotoes(btn.parentElement);
+  btn.classList.add("active");
 
-  estado.camada1.timeframe = tf;
-  estado.camada1.confirmado = false;
+  estado.estrutura = tipo;
 
-  atualizarResumo();
+  const feedback = document.getElementById("feedbackCamada2");
+  if (!feedback) return;
+
+  feedback.style.display = "block";
+
+  const textos = {
+    alta: "📈 Estrutura de alta → topos e fundos ascendentes",
+    baixa: "📉 Estrutura de baixa → topos e fundos descendentes",
+    range: "📊 Consolidação → mercado lateral",
+    indefinido: "❓ Estrutura indefinida → cautela"
+  };
+
+  feedback.innerHTML = textos[tipo] || "";
 }
 
-function confirmarCamada1() {
-  if (!estado.camada1.ativo) {
-    alert("Escolha um ativo.");
-    return;
-  }
+/********************************
+ * CAMADA 3 — EXPECTATIVA
+ ********************************/
+function definirExpectativa(btn, tipo) {
+  limparBotoes(btn.parentElement);
+  btn.classList.add("active");
 
-  estado.camada1.confirmado = true;
-  atualizarResumo();
+  estado.expectativa = tipo;
+
+  const box = document.getElementById("feedbackCamada3");
+  if (!box) return;
+
+  box.style.display = "block";
+  box.innerHTML =
+    tipo === "direcional"
+      ? "🎯 Mercado com viés direcional"
+      : "⚖️ Mercado neutro / lateral";
 }
 
-/***********************
- * CAMADA 2 — ESTRUTURA
- ***********************/
-function selecionarEstrutura(btn, estrutura) {
-  limparBotoes("btn-estrutura");
-  btn.classList.add("ativo");
+/********************************
+ * TRADINGVIEW — GRÁFICO
+ ********************************/
+function atualizarGrafico() {
+  const ativo = document.getElementById("ativo")?.value || "SPY";
+  estado.ativo = ativo;
 
-  estado.camada2.estrutura = estrutura;
-  estado.camada2.confirmado = false;
+  const iframe = document.getElementById("tv");
+  if (!iframe) return;
 
-  atualizarResumo();
+  iframe.src =
+    "https://s.tradingview.com/widgetembed/?" +
+    "symbol=" + ativo +
+    "&interval=D" +
+    "&theme=dark" +
+    "&style=1" +
+    "&toolbarbg=1f2937" +
+    "&hideideas=1";
 }
 
-function confirmarCamada2() {
-  if (!estado.camada2.estrutura) {
-    alert("Escolha a estrutura de mercado.");
-    return;
-  }
-
-  if (!estado.camada1.confirmado) {
-    alert("Confirme a Camada 1 antes.");
-    return;
-  }
-
-  estado.camada2.confirmado = true;
-  atualizarResumo();
-}
-
-/***********************
- * RESUMO VISUAL
- ***********************/
-function atualizarResumo() {
-  const el = document.getElementById("resumoGeral");
-  if (!el) return;
-
-  el.innerHTML = `
-    <b>Resumo Atual</b><br><br>
-    <b>Camada 1</b><br>
-    Ativo: ${estado.camada1.ativo ?? "—"}<br>
-    Timeframe: ${estado.camada1.timeframe}<br>
-    Status: ${estado.camada1.confirmado ? "✅ Confirmada" : "⏳ Pendente"}<br><br>
-
-    <b>Camada 2</b><br>
-    Estrutura: ${estado.camada2.estrutura ?? "—"}<br>
-    Status: ${estado.camada2.confirmado ? "✅ Confirmada" : "⏳ Pendente"}
-  `;
-}
-
-/***********************
- * BLOQUEIO DE FLUXO
- ***********************/
-function podeAvancar() {
-  return estado.camada1.confirmado && estado.camada2.confirmado;
-}
+/********************************
+ * FUNÇÕES NEUTRAS (PLACEHOLDER)
+ * Evitam erro se HTML chamar
+ ********************************/
+function selecionarPremio() {}
+function decisaoBase() {}
