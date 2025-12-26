@@ -1,96 +1,55 @@
-/********************************
- * UTILIDADES GERAIS
- ********************************/
-function limparBotoes(container) {
-  if (!container) return;
-  container.querySelectorAll("button").forEach(b =>
-    b.classList.remove("active", "ativo")
-  );
-}
-
-/********************************
- * ESTADO GLOBAL
- ********************************/
-const estado = {
-  ativo: "SPY",
-  estrutura: null,
-  expectativa: null
-};
-
-/********************************
+/******************************
  * CAMADA 1 — CONTEXTO
- ********************************/
+ ******************************/
 function avaliarContexto() {
-  // função chamada no HTML (não pode faltar)
-  console.log("Contexto avaliado");
+  const resultado = document.getElementById("resultado");
+  if (!resultado) return;
+
+  resultado.style.display = "block";
+  resultado.innerHTML =
+    "✅ Contexto avaliado.<br>" +
+    "📘 Esta é apenas a base educativa.";
 }
 
-/********************************
- * CAMADA 2 — ESTRUTURA DE MERCADO
- ********************************/
+/******************************
+ * CAMADA 2 — ESTRUTURA
+ ******************************/
 function estruturaMercado(btn, tipo) {
-  limparBotoes(btn.parentElement);
+  document
+    .querySelectorAll(".option-btn")
+    .forEach(b => b.classList.remove("active"));
+
   btn.classList.add("active");
 
-  estado.estrutura = tipo;
-
-  const feedback = document.getElementById("feedbackCamada2");
-  if (!feedback) return;
-
-  feedback.style.display = "block";
-
-  const textos = {
-    alta: "📈 Estrutura de alta → topos e fundos ascendentes",
-    baixa: "📉 Estrutura de baixa → topos e fundos descendentes",
-    range: "📊 Consolidação → mercado lateral",
-    indefinido: "❓ Estrutura indefinida → cautela"
-  };
-
-  feedback.innerHTML = textos[tipo] || "";
-}
-
-/********************************
- * CAMADA 3 — EXPECTATIVA
- ********************************/
-function definirExpectativa(btn, tipo) {
-  limparBotoes(btn.parentElement);
-  btn.classList.add("active");
-
-  estado.expectativa = tipo;
-
-  const box = document.getElementById("feedbackCamada3");
+  const box = document.getElementById("feedbackCamada2");
   if (!box) return;
 
   box.style.display = "block";
-  box.innerHTML =
-    tipo === "direcional"
-      ? "🎯 Mercado com viés direcional"
-      : "⚖️ Mercado neutro / lateral";
+
+  const textos = {
+    alta: "📈 Tendência de alta — topos e fundos ascendentes",
+    baixa: "📉 Tendência de baixa — pressão vendedora",
+    range: "📊 Consolidação — mercado lateral",
+    indefinido: "❓ Estrutura indefinida — aguarde"
+  };
+
+  box.innerHTML = textos[tipo];
 }
 
-/********************************
- * TRADINGVIEW — GRÁFICO
- ********************************/
+/******************************
+ * GRÁFICO — TRADINGVIEW
+ ******************************/
 function atualizarGrafico() {
   const ativo = document.getElementById("ativo")?.value || "SPY";
-  estado.ativo = ativo;
-
   const iframe = document.getElementById("tv");
+
   if (!iframe) return;
 
   iframe.src =
     "https://s.tradingview.com/widgetembed/?" +
     "symbol=" + ativo +
     "&interval=D" +
-    "&theme=dark" +
-    "&style=1" +
-    "&toolbarbg=1f2937" +
-    "&hideideas=1";
+    "&theme=dark";
 }
 
-/********************************
- * FUNÇÕES NEUTRAS (PLACEHOLDER)
- * Evitam erro se HTML chamar
- ********************************/
-function selecionarPremio() {}
-function decisaoBase() {}
+window.onload = atualizarGrafico;
