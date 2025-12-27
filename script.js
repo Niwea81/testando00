@@ -357,42 +357,5 @@ function selecionarEstrutura(btn,tipo){
     `;
   }
 
-  gerarCadeiaEducacional();
-}
-
-function gerarCadeiaEducacional(){
-  const preco = parseFloat(document.getElementById("precoAtivo")?.value || 100);
-  const strikes = [];
-
-  for(let i=-5;i<=5;i++){
-    strikes.push(Math.round(preco + i*2));
-  }
-
-  const tbody = document.getElementById("cadeiaOpcoes");
-  tbody.innerHTML = "";
-
-  strikes.forEach(s=>{
-    let classe = "otm";
-    if(s===Math.round(preco)) classe="atm";
-    if(s<preco) classe="itm";
-
-    tbody.innerHTML += `
-      <tr>
-        <td class="${classe}">1.20</td>
-        <td class="${classe}">1.35</td>
-        <td class="${classe}">PUT</td>
-        <td class="${classe}">${s}</td>
-        <td class="${classe}">CALL</td>
-        <td class="${classe}">1.30</td>
-        <td class="${classe}">1.45</td>
-      </tr>
-    `;
-  });
-
-  document.getElementById("gradeOpcoes").style.display = "block";
-}
-
-function limparBotoes(container){
-  [...container.children].forEach(b=>b.classList.remove("active"));
-}
+ }
 
