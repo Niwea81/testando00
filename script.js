@@ -330,62 +330,40 @@ function decisaoBase(btn, tipo) {
     call: `
       <b>📈 Call Comprada — Exemplo Educacional</b><br><br>
       🟢 Strike: ATM ou levemente OTM<br>
-      🕒 Tempo (DTE): curto (3 a 14 dias)<br>
-      ⚠️ Risco: limitado ao prêmio pago<br><br>
+      🕒 DTE: 3–14 dias<br>
+      ⚠️ Risco: prêmio pago<br><br>
       <i>Grade típica:</i><br>
-      • Preço baixo<br>
-      • Delta médio (~0.40 – 0.55)<br>
-      • Sensível ao tempo (Theta)
+      • Delta ~0.45<br>
+      • Theta negativo
     `,
     put: `
       <b>📉 Put Comprada — Exemplo Educacional</b><br><br>
-      🔴 Strike: ATM ou levemente OTM<br>
-      🕒 Tempo (DTE): curto (3 a 14 dias)<br>
-      ⚠️ Risco: limitado ao prêmio pago<br><br>
-      <i>Grade típica:</i><br>
-      • Proteção ou direcional<br>
-      • Delta negativo (~-0.40)<br>
-      • Sofre com consolidação
+      🔴 Strike: ATM ou OTM<br>
+      🕒 DTE: 3–14 dias<br>
+      ⚠️ Risco: prêmio pago
     `,
     bull: `
-      <b>📈 Bull Spread — Exemplo Educacional</b><br><br>
-      🟢 Compra: Call ATM<br>
-      🔴 Venda: Call OTM<br>
-      🕒 Tempo (DTE): curto a médio<br>
-      ⚠️ Risco: limitado<br><br>
-      <i>Grade típica:</i><br>
-      • Custo menor<br>
-      • Lucro limitado<br>
-      • Menor impacto do Theta
+      <b>📈 Bull Spread</b><br><br>
+      Compra Call ATM<br>
+      Venda Call OTM<br>
+      Risco limitado
     `,
     bear: `
-      <b>📉 Bear Spread — Exemplo Educacional</b><br><br>
-      🔴 Compra: Put ATM<br>
-      🟢 Venda: Put OTM<br>
-      🕒 Tempo (DTE): curto a médio<br>
-      ⚠️ Risco: limitado<br><br>
-      <i>Grade típica:</i><br>
-      • Estrutura defensiva<br>
-      • Menos exposição ao tempo
+      <b>📉 Bear Spread</b><br><br>
+      Compra Put ATM<br>
+      Venda Put OTM<br>
+      Risco limitado
     `,
     credit: `
-      <b>🟨 Spread de Crédito — Exemplo Educacional</b><br><br>
-      🟢 Venda: OTM<br>
-      🔴 Compra: proteção mais distante<br>
-      🕒 Tempo (DTE): 7 a 21 dias<br>
-      ⚠️ Risco: limitado, porém maior que o crédito<br><br>
-      <i>Grade típica:</i><br>
-      • Alta probabilidade<br>
-      • Ganho pequeno e recorrente
+      <b>🟨 Spread de Crédito</b><br><br>
+      Venda OTM<br>
+      Compra proteção<br>
+      Alta probabilidade
     `,
     neutral: `
-      <b>🔵 Estrutura Neutra — Exemplo Educacional</b><br><br>
-      ⚖️ Strikes equidistantes<br>
-      🕒 Tempo (DTE): curto<br>
-      ⚠️ Risco: definido<br><br>
-      <i>Grade típica:</i><br>
-      • Mercado lateral<br>
-      • Dependente de volatilidade
+      <b>🔵 Estrutura Neutra</b><br><br>
+      Mercado lateral<br>
+      Dependente de volatilidade
     `
   };
 
@@ -393,10 +371,10 @@ function decisaoBase(btn, tipo) {
     btn.addEventListener("click", () => {
       const tipo = btn.dataset.estrutura;
       exemplo.style.display = "block";
-      exemplo.innerHTML = exemplos[tipo] || "";
+      exemplo.innerHTML = exemplos[tipo] || "Estrutura não encontrada";
     });
   });
 
-})();
+});
 
 
