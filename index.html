@@ -2,145 +2,243 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Checklist Profissional de Trade</title>
+  <title>Checklist de Trade – Camada 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <h1>1️⃣ CONTEXTO MACRO – Primeiro Filtro</h1>
 
-<h1>📊 Checklist Profissional de Trade em Opções</h1>
+  <section>
+    <h3>Força do VIX</h3>
+    <input type="range" id="vix" min="10" max="40" value="20">
+    <p>VIX atual: <span id="vixValue">20</span></p>
+  </section>
 
-<!-- ================= CAMADA 1 ================= -->
+  <section>
+    <h3>Agenda Econômica</h3>
+    <select id="agenda">
+      <option value="baixo">Baixo impacto ⭐</option>
+      <option value="medio">Médio impacto ⭐⭐</option>
+      <option value="alto">Alto impacto ⭐⭐⭐</option>
+    </select>
+  </section>
 
-<section class="section">
-  <h2>1️⃣ Contexto Macro</h2>
+  <section class="eventos">
+    <h3>Eventos macro hoje</h3>
+    <label><input type="checkbox" id="cpi"> CPI</label>
+    <label><input type="checkbox" id="fomc"> FOMC</label>
+    <label><input type="checkbox" id="payroll"> Payroll</label>
+  </section>
 
-  <label>VIX</label>
-  <input type="range" id="vix" min="10" max="40" value="20">
-
-  <label>Perfil</label>
-  <select id="perfil">
-    <option value="iniciante">Iniciante</option>
-    <option value="intermediario">Intermediário</option>
-    <option value="avancado">Avançado</option>
-  </select>
+  <section>
+    <h3>Seu nível de experiência</h3>
+    <select id="perfil">
+      <option value="iniciante">Iniciante</option>
+      <option value="intermediario">Intermediário</option>
+      <option value="avancado">Avançado</option>
+    </select>
+  </section>
 
   <button onclick="avaliarContexto()">Avaliar Contexto</button>
 
-  <div id="resultado" class="guided" style="display:none"></div>
-</section>
+  <h2>Resultado</h2>
+  <p id="resultado"></p>
 
-<!-- ================= CAMADA 2 ================= -->
+  <script src="script.js"></script>
+</body>
+</html>
 
-<section class="section">
-  <h2>2️⃣ Estrutura de Mercado</h2>
+<!-- ================= CAMADA 2 — ESTRUTURA DO MERCADO ================= -->
 
-  <label>Ativo</label>
-  <select id="ativo" onchange="atualizarGraficos()">
-    <option>SPY</option>
-    <option>SPX</option>
-    <option>XSP</option>
-    <option>QQQ</option>
-    <option>AAPL</option>
-    <option>MSFT</option>
-    <option>AMZN</option>
-    <option>GOOGL</option>
-    <option>META</option>
-    <option>NVDA</option>
-    <option>TSLA</option>
-  </select>
+<label for="ativo">Ativo</label>
+<select id="ativo" onchange="atualizarGrafico()">
+  <option value="SPY">SPY</option>
+  <option value="SPX">SPX</option>
+  <option value="XSP">XSP</option>
+  <option value="QQQ">QQQ</option>
+  <option value="AAPL">AAPL</option>
+  <option value="MSFT">MSFT</option>
+  <option value="AMZN">AMZN</option>
+  <option value="GOOGL">GOOGL</option>
+  <option value="META">META</option>
+  <option value="NVDA">NVDA</option>
+  <option value="TSLA">TSLA</option>
+</select>
+<div class="section">
+  <h2>📈 Gráfico de Contexto</h2>
 
-  <iframe id="tv"
-    style="width:100%;height:420px;border:none;border-radius:12px"
+  <iframe
+    id="tv"
+    style="width:100%;height:420px;border-radius:12px;border:none;"
     loading="lazy">
   </iframe>
 
+  <p style="color:#94a3b8">
+    Compare o gráfico antes de decidir qualquer estrutura.
+  </p>
+</div>
+
+
+<div class="section">
+  <h2>2️⃣ Estrutura atual do mercado</h2>
+
+  <p style="color:#94a3b8;font-size:15px">
+    👉 <b>Olhe o gráfico do ativo</b> primeiro no <b>Diário</b> e depois no <b>4 horas</b>.  
+    Não pense em opções ainda. Apenas descreva o que você vê.
+  </p>
+
+  <!-- 🔽 BLOCO MOVIDO PARA AQUI -->
+  <h3>📐 O preço está reagindo a linhas de tendência?</h3>
+
+  <p style="color:#94a3b8;font-size:14px">
+    Considere toques recentes e claros em linhas de tendência ou canais.
+  </p>
+
+  <label>
+    <input type="checkbox" id="toqueDiario">
+    📅 No gráfico Diário há toque ou reação em linha de tendência
+  </label>
+
+  <label>
+    <input type="checkbox" id="toque4h">
+    ⏱️ No gráfico de 4H há toque ou reação em linha de tendência
+  </label>
+
+  <div class="note">
+    <b>📘 Para iniciantes:</b><br>
+    • Tendência só é tendência quando o preço respeita linhas<br>
+    • Diário manda mais que o 4H<br>
+    • Se não estiver claro, marque <b>Indefinido</b>
+  </div>
+
+  <!-- 🔽 BOTÕES DE ESTRUTURA -->
+  <h3 style="margin-top:25px">📌 Qual a estrutura predominante?</h3>
+
   <div class="options">
-    <button class="option-btn" onclick="estruturaMercado(this,'alta')">📈 Alta</button>
-    <button class="option-btn" onclick="estruturaMercado(this,'baixa')">📉 Baixa</button>
-    <button class="option-btn" onclick="estruturaMercado(this,'range')">📊 Range</button>
+    <button class="option-btn" onclick="estruturaMercado(this,'alta')">📈 Tendência de Alta</button>
+    <button class="option-btn" onclick="estruturaMercado(this,'baixa')">📉 Tendência de Baixa</button>
+    <button class="option-btn" onclick="estruturaMercado(this,'range')">📊 Consolidação / Range</button>
     <button class="option-btn" onclick="estruturaMercado(this,'indefinido')">❓ Indefinido</button>
   </div>
 
   <div id="feedbackCamada2" class="guided" style="display:none"></div>
-</section>
+</div>
 
-<!-- ================= CAMADA 3 ================= -->
+<!-- ================= CAMADA 3 — VOLATILIDADE ================= -->
 
-<section class="section">
-  <h2>3️⃣ Volatilidade (VIX)</h2>
+<div class="section">
+  <h2>3️⃣ Volatilidade do Mercado (IV / VIX)</h2>
 
-  <iframe id="vixChart"
-    style="width:100%;height:260px;border:none;border-radius:12px"
-    loading="lazy">
-  </iframe>
-</section>
+  <p style="color:#94a3b8;font-size:15px">
+    👉 Antes de pensar em estratégias, observe o <b>nível de volatilidade</b>.  
+    Volatilidade define <b>risco, prêmio e tipo de estrutura</b>.
+  </p>
 
-<!-- ================= CAMADA 4 ================= -->
+  <div class="vol-grid">
+    <div>
+      <h3>🌡️ VIX — Termômetro do Mercado</h3>
 
-<section class="section">
+      <iframe
+        id="vixChart"
+        style="width:100%;height:260px;border:none;border-radius:12px"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="guided" id="volFeedback">
+      <b>📘 Para iniciantes:</b><br><br>
+
+      🟢 <b>Volatilidade baixa</b><br>
+      • Mercado mais previsível<br>
+      • Prêmios mais baratos<br>
+      • Estruturas compradas fazem mais sentido<br><br>
+
+      🔴 <b>Volatilidade alta</b><br>
+      • Mercado instável e emocional<br>
+      • Prêmios inflados<br>
+      • Estruturas vendidas / spreads tendem a ser mais seguras<br><br>
+
+      ⚠️ Eventos econômicos podem alterar a volatilidade de forma abrupta.  
+      Mesmo após o evento, o impacto pode continuar.
+    </div>
+  </div>
+</div>
+
+<!-- ================= CAMADA 4 — DIRECIONAL × NEUTRO ================= -->
+
+<div class="section">
   <h2>4️⃣ Expectativa de Movimento</h2>
+
+  <p style="color:#94a3b8;font-size:15px">
+    👉 Agora responda com sinceridade:  
+    você espera que o <b>preço se desloque</b> ou apenas que ele <b>permaneça dentro de uma faixa</b>?
+  </p>
 
   <div class="options">
     <button class="option-btn" onclick="definirExpectativa(this,'direcional')">
-      🎯 Direcional
+      🎯 Direcional<br>
+      <span style="font-size:13px;color:#94a3b8">
+        Espero movimento claro de alta ou baixa
+      </span>
     </button>
+
     <button class="option-btn" onclick="definirExpectativa(this,'neutro')">
-      🧲 Neutro
+      🧲 Neutro<br>
+      <span style="font-size:13px;color:#94a3b8">
+        Espero que o preço fique dentro de um range
+      </span>
     </button>
+
     <button class="option-btn" onclick="definirExpectativa(this,'indefinido')">
-      ❓ Indefinido
+      ❓ Indefinido<br>
+      <span style="font-size:13px;color:#94a3b8">
+        Não tenho convicção suficiente
+      </span>
     </button>
   </div>
 
   <div id="feedbackCamada4" class="guided" style="display:none"></div>
-</section>
+</div>
 
-<!-- ================= CAMADA 5 ================= -->
+<!-- ================= CAMADA 5 — SELEÇÃO DE ESTRUTURA ================= -->
 
-<section class="section">
-  <h2>5️⃣ Tipo de Estrutura (antes do strike)</h2>
+<div class="section">
+  <h2>5️⃣ Tipo de estrutura desejada</h2>
 
-  <input id="precoAtivo" type="number" value="100"
-    style="width:120px;margin-bottom:15px">
+  <p style="color:#94a3b8;font-size:15px">
+    👉 Agora não pense em CALL ou PUT.  
+    Pense apenas <b>no comportamento do preço</b> que você espera.
+  </p>
 
   <div class="options">
-    <button class="option-btn" onclick="selecionarEstrutura(this,'simples')">
-      📍 Posição Simples
+    <button class="option-btn" onclick="selecionarEstrutura(this,'movimento')">
+      📈 Acompanhamento de movimento
+      <span>Preço tende a andar a favor</span>
     </button>
-    <button class="option-btn" onclick="selecionarEstrutura(this,'spread')">
-      🧩 Spread
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'controlado')">
+      🧩 Movimento controlado
+      <span>Quero risco e ganho limitados</span>
     </button>
-    <button class="option-btn" onclick="selecionarEstrutura(this,'coberta')">
-      🛡️ Coberta
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'lateral')">
+      🟨 Preço lateral / parado
+      <span>Mercado deve ficar em range</span>
+    </button>
+
+    <button class="option-btn" onclick="selecionarEstrutura(this,'defesa')">
+      🛡️ Proteção / Defesa
+      <span>Reduzir risco ou proteger posição</span>
     </button>
   </div>
 
   <div id="feedbackCamada5" class="guided" style="display:none"></div>
-</section>
+</div>
 
-<!-- ================= GRADE EDUCACIONAL ================= -->
 
-<section id="gradeOpcoes" class="section" style="display:none">
-  <h2>🧠 Grade Educacional (ITM / ATM / OTM)</h2>
 
-  <table style="width:100%;text-align:center">
-    <thead>
-      <tr>
-        <th>PUT</th>
-        <th>STRIKE</th>
-        <th>CALL</th>
-      </tr>
-    </thead>
-    <tbody id="cadeiaOpcoes"></tbody>
-  </table>
 
-  <p class="legend">
-    🟢 ITM &nbsp;&nbsp; 🟡 ATM &nbsp;&nbsp; 🔵 OTM
-  </p>
-</section>
-
-<script src="script.js"></script>
 </body>
 </html>
