@@ -361,38 +361,50 @@ function selecionarEstrutura(btn,tipo){
 }
 
 function gerarCadeiaEducacional(){
-  const preco = parseFloat(document.getElementById("precoAtivo")?.value || 100);
-  const strikes = [];
+  const preco = parseFloat(document.getElementById("precoAtivo")?.value || 31);
+  const strikes = [];
 
-  for(let i=-5;i<=5;i++){
-    strikes.push(Math.round(preco + i*2));
-  }
+  for(let i=-6;i<=6;i++){
+    strikes.push((preco + i*0.25).toFixed(2));
+  }
 
-  const tbody = document.getElementById("cadeiaOpcoes");
-  tbody.innerHTML = "";
+  const calls = document.getElementById("callsCol");
+  const puts  = document.getElementById("putsCol");
+  const mid   = document.getElementById("strikeCol");
 
-  strikes.forEach(s=>{
-    let classe = "otm";
-    if(s===Math.round(preco)) classe="atm";
-    if(s<preco) classe="itm";
+  calls.innerHTML = "";
+  puts.innerHTML  = "";
+  mid.innerHTML   = "";
 
-    tbody.innerHTML += `
-      <tr>
-        <td class="${classe}">1.20</td>
-        <td class="${classe}">1.35</td>
-        <td class="${classe}">PUT</td>
-        <td class="${classe}">${s}</td>
-        <td class="${classe}">CALL</td>
-        <td class="${classe}">1.30</td>
-        <td class="${classe}">1.45</td>
-      </tr>
-    `;
-  });
+  strikes.forEach(s=>{
+    let classe = "otm";
+    if(parseFloat(s) === parseFloat(preco.toFixed(2))) classe="atm";
+    if(parseFloat(s) < preco) classe="itm";
 
-  document.getElementById("gradeOpcoes").style.display = "block";
+    calls.innerHTML += `
+      <div class="option-row ${classe}">
+        <spanI>${(Math.random()*4).toFixed(2)}M</span>
+        <span>${(Math.random()*0.7).toFixed(2)}</span>
+        <span>${(Math.random()*2).toFixed(2)}</span>
+        <span>${(Math.random()*2.5).toFixed(2)}</span>
+      </div>
+    `;
+
+    mid.innerHTML += `
+      <div class="strike-row ${classe}">
+        ${s}
+      </div>
+    `;
+
+    puts.innerHTML += `
+      <div class="option-row ${classe}">
+        <span>${(Math.random()*2).toFixed(2)}</span>
+        <span>${(Math.random()*2.5).toFixed(2)}</span>
+        <span>-${(Math.random()*0.7).toFixed(2)}</span>
+        <span>${(Math.random()*4).toFixed(2)}M</span>
+      </div>
+    `;
+  });
+
+  document.getElementById("gradeOpcoes").style.display = "block";
 }
-
-function limparBotoes(container){
-  [...container.children].forEach(b=>b.classList.remove("active"));
-}
-
