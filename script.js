@@ -1,293 +1,149 @@
-const vixSlider = document.getElementById("vix");
-const vixValue = document.getElementById("vixValue");
+/***********************
+ * ESTADO GLOBAL
+ ***********************/
+const estado = {
+  contexto: {},
+  estruturaMercado: null,
+  expectativa: null,
+  comportamentoPreco: null,   // 5A
+  premio: null,               // 5B
+  estruturaOpcoes: null       // 5B
+};
 
-vixSlider.addEventListener("input", () => {
-  vixValue.textContent = vixSlider.value;
-});
-
+/***********************
+ * CAMADA 1 — CONTEXTO
+ ***********************/
 function avaliarContexto() {
-  const vix = Number(vixSlider.value);
+  const vix = document.getElementById("vix").value;
   const agenda = document.getElementById("agenda").value;
   const perfil = document.getElementById("perfil").value;
 
-  const cpi = document.getElementById("cpi").checked;
-  const fomc = document.getElementById("fomc").checked;
-  const payroll = document.getElementById("payroll").checked;
+  estado.contexto = { vix, agenda, perfil };
 
-  let mensagem = "";
-  let status = "✅ Contexto macro aceitável para avançar.";
+  let mensagem = "Contexto favorável.";
 
-  // VIX
-  if (vix >= 30) {
-    mensagem += "⚠️ VIX elevado indica ambiente instável.\n";
-    if (perfil === "iniciante") {
-      status = "⛔ Trade bloqueado para iniciantes em VIX alto.";
-    }
-  }
+  if (vix > 25) mensagem = "⚠️ VIX elevado: cuidado com risco.";
+  if (agenda === "alto") mensagem += " Evento macro relevante hoje.";
 
-  // Agenda
-  if (agenda === "alto") {
-    mensagem += "⚠️ Agenda econômica com eventos ⭐⭐⭐.\n";
-    if (perfil === "iniciante") {
-      status = "⛔ Evite operar em dias de alto impacto.";
-    }
-  }
-
-  // Eventos individuais
-  if (cpi) {
-    mensagem += "🔥 CPI ativo: volatilidade extrema possível.\n";
-    if (perfil !== "avancado") {
-      status = "⛔ CPI exige estratégias específicas.";
-    }
-  }
-
-  if (fomc) {
-    mensagem += "🔥 FOMC ativo: mudança de expectativa macro.\n";
-    if (perfil === "iniciante") {
-      status = "⛔ FOMC não é indicado para iniciantes.";
-    }
-  }
-
-  if (payroll) {
-    mensagem += "🔥 Payroll ativo: ruído e falsos movimentos.\n";
-    if (perfil === "iniciante") {
-      status = "⛔ Payroll tende a gerar armadilhas.";
-    }
-  }
-
-  if (perfil === "iniciante") {
-    mensagem += "\n📘 Nota educativa:\nMesmo após o evento, o mercado pode continuar ajustando preços.";
-  }
-
-  document.getElementById("resultado").innerText =
-    mensagem + "\n\n" + status;
+  document.getElementById("resultado").innerText = mensagem;
 }
 
-// ================= CAMADA 2 — ESTRUTURA DO MERCADO =================
-
-function estruturaMercado(btn, tipo) {
-
-  // Remove seleção anterior
-  document
-    .querySelectorAll(".option-btn")
-    .forEach(b => b.classList.remove("active"));
-
-  // Ativa botão atual
-  btn.classList.add("active");
-
-  // Leitura dos checkboxes
-  const diario = document.getElementById("toqueDiario")?.checked;
-  const h4 = document.getElementById("toque4h")?.checked;
-
-  let confirmacao = "";
-
-  if (diario && h4) {
-    confirmacao = "✔️ Diário e 4H confirmam reação técnica.";
-  } else if (diario || h4) {
-    confirmacao = "⚠️ Apenas um timeframe confirma.";
-  } else {
-    confirmacao = "⛔ Nenhuma reação técnica clara.";
-  }
-
-  const mensagens = {
-    alta: `
-      📈 <b>Tendência de Alta</b><br><br>
-      Topos e fundos ascendentes.<br>
-      ${confirmacao}<br><br>
-      📘 Iniciante: operar a favor da tendência reduz erros.
-    `,
-    baixa: `
-      📉 <b>Tendência de Baixa</b><br><br>
-      Topos e fundos descendentes.<br>
-      ${confirmacao}<br><br>
-      📘 Iniciante: cuidado com compras contra o fluxo.
-    `,
-    range: `
-      📊 <b>Consolidação / Range</b><br><br>
-      Mercado sem direção definida.<br>
-      ${confirmacao}<br><br>
-      📘 Iniciante: direcional costuma falhar aqui.
-    `,
-    indefinido: `
-      ❓ <b>Estrutura indefinida</b><br><br>
-      Mercado em transição ou confuso.<br>
-      ${confirmacao}<br><br>
-      📘 Profissionais aguardam clareza.
-    `
-  };
-
-  const box = document.getElementById("feedbackCamada2");
-  if (box) {
-    box.style.display = "block";
-    box.innerHTML = mensagens[tipo];
-  }
-}
-
-function atualizarGrafico() {
-  const ativo = document.getElementById("ativo").value;
-
-  const url = `https://s.tradingview.com/widgetembed/?symbol=${ativo}&interval=D&hidetoptoolbar=1&hidesidetoolbar=1&theme=dark`;
-
-  document.getElementById("tv").src = url;
-}
-
-// carrega gráfico inicial ao abrir o site
-window.onload = atualizarGrafico;
-
-function atualizarGrafico() {
-  const ativo = document.getElementById("ativo").value;
-
-  // Gráfico do ativo (Camada 2)
-  const ativoUrl = `https://s.tradingview.com/widgetembed/?symbol=${ativo}&interval=D&theme=dark`;
-  document.getElementById("tv").src = ativoUrl;
-
-  // Gráfico do VIX (Camada 3)
-  const vixUrl = `https://s.tradingview.com/widgetembed/?symbol=VIX&interval=D&theme=dark`;
-  document.getElementById("vixChart").src = vixUrl;
-}
-
-window.onload = atualizarGrafico;
-
-function definirExpectativa(botao, tipo) {
-  document
-    .querySelectorAll("#feedbackCamada4, .option-btn")
-    .forEach(el => el.classList?.remove("active"));
-
+/***********************
+ * CAMADA 2 — ESTRUTURA DO MERCADO
+ ***********************/
+function estruturaMercado(botao, tipo) {
+  limparGrupo(botao);
   botao.classList.add("active");
+
+  estado.estruturaMercado = tipo;
+
+  const feedback = document.getElementById("feedbackCamada2");
+  feedback.style.display = "block";
+  feedback.innerHTML = `📊 Estrutura identificada: <b>${tipo.toUpperCase()}</b>`;
+}
+
+/***********************
+ * CAMADA 3 — VOLATILIDADE
+ ***********************/
+function atualizarGrafico() {
+  const ativo = document.getElementById("ativo").value;
+  document.getElementById("tv").src =
+    `https://s.tradingview.com/widgetembed/?symbol=${ativo}&interval=D&theme=dark`;
+}
+
+/***********************
+ * CAMADA 4 — EXPECTATIVA
+ ***********************/
+function definirExpectativa(botao, tipo) {
+  limparGrupo(botao);
+  botao.classList.add("active");
+
+  estado.expectativa = tipo;
 
   const feedback = document.getElementById("feedbackCamada4");
   feedback.style.display = "block";
-
-  if (tipo === "direcional") {
-    feedback.innerHTML = `
-      <b>🎯 Leitura Direcional</b><br><br>
-      • Você espera deslocamento do preço<br>
-      • Normalmente alinhado com tendência clara<br>
-      • Exige timing, convicção e stop bem definido<br><br>
-
-      <b>📘 Para iniciantes:</b><br>
-      Direcional erra mais, mas quando acerta paga melhor.
-    `;
-  }
-
-  if (tipo === "neutro") {
-    feedback.innerHTML = `
-      <b>🧲 Leitura Neutra</b><br><br>
-      • Você não espera grande movimento<br>
-      • Foco em tempo e estatística<br>
-      • Requer controle de risco e disciplina<br><br>
-
-      <b>📘 Para iniciantes:</b><br>
-      Neutro costuma ter maior taxa de acerto, mas exige gestão.
-    `;
-  }
-
-  if (tipo === "indefinido") {
-    feedback.innerHTML = `
-      <b>❓ Falta de Convicção</b><br><br>
-      • Mercado confuso ou leitura incompleta<br>
-      • Melhor cenário para observar e aprender<br><br>
-
-      <b>📘 Para iniciantes:</b><br>
-      Não operar também é uma decisão profissional.
-    `;
-  }
+  feedback.innerHTML = `🎯 Expectativa definida: <b>${tipo.toUpperCase()}</b>`;
 }
 
-function selecionarEstrutura(btn, tipo) {
-  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+/***********************
+ * CAMADA 5A — COMPORTAMENTO DO PREÇO
+ ***********************/
+function selecionarComportamento(botao, tipo) {
+  limparGrupo(botao);
+  botao.classList.add("active");
 
-  let msg = "";
+  estado.comportamentoPreco = tipo;
 
-  if (tipo === "movimento") {
-    msg = `
-      <b>📈 Acompanhamento de movimento</b><br><br>
-      • Funciona melhor em mercados direcionais<br>
-      • Sensível à volatilidade<br>
-      • Exige bom timing de entrada<br><br>
-      <b>⚠️ Iniciantes:</b> movimentos contra podem gerar perdas rápidas.
-    `;
-  }
-
-  if (tipo === "controlado") {
-    msg = `
-      <b>🧩 Movimento controlado</b><br><br>
-      • Ideal quando há direção, mas com risco reduzido<br>
-      • Menor impacto emocional<br>
-      • Boa para aprendizado estrutural<br><br>
-      <b>📘 Dica:</b> muito usada por traders consistentes.
-    `;
-  }
-
-  if (tipo === "lateral") {
-    msg = `
-      <b>🟨 Preço lateral / parado</b><br><br>
-      • Mercado sem tendência clara<br>
-      • Volatilidade elevada favorece<br>
-      • Ganho vem do tempo, não do movimento<br><br>
-      <b>⚠️ Atenção:</b> rompimentos causam ajustes.
-    `;
-  }
-
-  if (tipo === "defesa") {
-    msg = `
-      <b>🛡️ Proteção / Defesa</b><br><br>
-      • Foco em reduzir risco<br>
-      • Pode proteger carteira ou operação aberta<br>
-      • Muito usada por profissionais<br><br>
-      <b>📘 Educação:</b> defesa também é estratégia.
-    `;
-  }
-
-  const box = document.getElementById("feedbackCamada5");
-  box.style.display = "block";
-  box.innerHTML = msg;
+  const feedback = document.getElementById("feedbackCamada5");
+  feedback.style.display = "block";
+  feedback.innerHTML =
+    `📈 Comportamento esperado: <b>${tipo.toUpperCase()}</b>`;
 }
 
-function decisaoBase(btn, tipo) {
-  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+/***********************
+ * CAMADA 5B — PRÊMIO
+ ***********************/
+function selecionarPremio(botao, tipo) {
+  limparGrupo(botao);
+  botao.classList.add("active");
 
-  let alerta = "";
+  estado.premio = tipo;
 
-  if (tipo === "comprar") {
-    alerta = `
-      🟢 <b>Posição comprada</b><br>
-      • Risco limitado ao valor investido<br>
-      • Sensível ao tempo e volatilidade<br>
-      • Perdas são conhecidas desde a entrada
+  document.getElementById("feedbackPremio").style.display = "block";
+  document.getElementById("feedbackPremio").innerHTML =
+    `💰 Decisão sobre prêmio: <b>${tipo.toUpperCase()}</b>`;
+
+  // Libera próximo bloco
+  document.getElementById("blocoEstrutura").style.display = "block";
+}
+
+/***********************
+ * CAMADA 5B — ESTRUTURA DE OPÇÕES
+ ***********************/
+function selecionarEstruturaOpcoes(botao, tipo) {
+  limparGrupo(botao);
+  botao.classList.add("active");
+
+  estado.estruturaOpcoes = tipo;
+
+  document.getElementById("alertasEstrutura").style.display = "block";
+  document.getElementById("alertasEstrutura").innerHTML =
+    `📦 Estrutura escolhida: <b>${tipo.toUpperCase()}</b>`;
+
+  // Mostrar grade educacional
+  gerarGradeEducacional();
+}
+
+/***********************
+ * GRADE EDUCACIONAL
+ ***********************/
+function gerarGradeEducacional() {
+  const tabela = document.getElementById("cadeiaOpcoes");
+  if (!tabela) return;
+
+  tabela.innerHTML = "";
+
+  const strikes = [95, 100, 105];
+  strikes.forEach((strike, i) => {
+    const classe =
+      i === 1 ? "atm" : i === 0 ? "itm" : "otm";
+
+    tabela.innerHTML += `
+      <tr class="${classe}">
+        <td>1.20</td><td>1.35</td><td></td>
+        <td>${strike}</td>
+        <td></td><td>1.10</td><td>1.25</td>
+      </tr>
     `;
-  }
+  });
 
-  if (tipo === "vender") {
-    alerta = `
-      🔴 <b>Posição vendida</b><br>
-      ⚠️ Pode ter <b>risco ilimitado</b><br>
-      ⚠️ Exige margem<br>
-      ⚠️ Movimentos extremos podem gerar ajustes ou perdas relevantes
-    `;
-  }
+  document.getElementById("gradeOpcoes").style.display = "block";
+}
 
-  if (tipo === "spread") {
-    alerta = `
-      🧩 <b>Estrutura em Spread</b><br>
-      • Risco e ganho limitados<br>
-      • Consome menos margem<br>
-      • Muito usada por traders com contas menores
-    `;
-  }
-
-  if (tipo === "coberta") {
-    alerta = `
-      🛡️ <b>Estrutura Coberta</b><br>
-      ⚠️ Exige posse do ativo<br>
-      • Reduz risco direcional<br>
-      • Limita ganhos em troca de proteção
-    `;
-  }
-
-  const box = document.getElementById("alertasCamada5");
-  box.style.display = "block";
-  box.innerHTML = alerta;
+/***********************
+ * UTIL
+ ***********************/
+function limparGrupo(botao) {
+  const grupo = botao.parentElement.querySelectorAll(".option-btn");
+  grupo.forEach(b => b.classList.remove("active"));
 }
