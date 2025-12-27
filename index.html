@@ -307,6 +307,42 @@
 
 </section>
 
+<script>
+function c7_mostrar(tipo) {
+  const box = document.getElementById("c7_resultado");
+  if (!box) {
+    alert("Elemento c7_resultado não encontrado");
+    return;
+  }
+
+  let texto = "";
+
+  switch (tipo) {
+    case "call":
+      texto = "📈 Call comprada → Alta forte, risco limitado ao prêmio.";
+      break;
+    case "put":
+      texto = "📉 Put comprada → Queda esperada ou proteção.";
+      break;
+    case "bull":
+      texto = "📈 Bull Spread → Alta moderada, risco controlado.";
+      break;
+    case "bear":
+      texto = "📉 Bear Spread → Queda moderada, risco definido.";
+      break;
+    case "credit":
+      texto = "🟨 Spread de Crédito → Mercado lateral, foco em probabilidade.";
+      break;
+    case "neutral":
+      texto = "🔵 Estrutura Neutra → Mercado parado, foco em tempo.";
+      break;
+  }
+
+  box.innerHTML = texto;
+  box.style.display = "block";
+}
+</script>
+
 
 </body>
 </html>
