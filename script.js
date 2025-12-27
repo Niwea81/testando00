@@ -292,3 +292,107 @@ function decisaoBase(btn, tipo) {
   box.innerHTML = alerta;
 }
 
+let tipoPremio = null;
+
+function selecionarPremio(btn,valor){
+  limparBotoes(btn.parentElement);
+  btn.classList.add("active");
+  tipoPremio = valor;
+
+  const box = document.getElementById("feedbackPremio");
+  box.style.display = "block";
+
+  if(valor==="comprar"){
+    box.innerHTML = `
+      🟢 Comprar prêmio<br>
+      ✔️ Risco limitado<br>
+      ⚠️ O tempo trabalha contra você
+    `;
+  }
+  if(valor==="vender"){
+    box.innerHTML = `
+      🔴 Vender prêmio<br>
+      ✔️ Probabilidade maior<br>
+      ⚠️ Pode exigir margem e controle de risco
+    `;
+  }
+  if(valor==="indefinido"){
+    box.innerHTML = `
+      ❓ Tudo bem não saber agora.<br>
+      Continue observando o contexto.
+    `;
+  }
+
+  document.getElementById("blocoEstrutura").style.display = "block";
+}
+
+function selecionarEstrutura(btn,tipo){
+  limparBotoes(btn.parentElement);
+  btn.classList.add("active");
+
+  const alerta = document.getElementById("alertasEstrutura");
+  alerta.style.display = "block";
+
+  if(tipo==="simples"){
+    alerta.innerHTML = `
+      📍 Posição simples<br>
+      • Pode ter risco ilimitado se vendida<br>
+      • Exige atenção à margem
+    `;
+  }
+
+  if(tipo==="spread"){
+    alerta.innerHTML = `
+      🧩 Spread<br>
+      ✔️ Risco limitado<br>
+      ✔️ Adequado para contas menores
+    `;
+  }
+
+  if(tipo==="coberta"){
+    alerta.innerHTML = `
+      🛡️ Estrutura coberta<br>
+      ✔️ Exige ativo em carteira<br>
+      ✔️ Reduz risco
+    `;
+  }
+
+  gerarCadeiaEducacional();
+}
+
+function gerarCadeiaEducacional(){
+  const preco = parseFloat(document.getElementById("precoAtivo")?.value || 100);
+  const strikes = [];
+
+  for(let i=-5;i<=5;i++){
+    strikes.push(Math.round(preco + i*2));
+  }
+
+  const tbody = document.getElementById("cadeiaOpcoes");
+  tbody.innerHTML = "";
+
+  strikes.forEach(s=>{
+    let classe = "otm";
+    if(s===Math.round(preco)) classe="atm";
+    if(s<preco) classe="itm";
+
+    tbody.innerHTML += `
+      <tr>
+        <td class="${classe}">1.20</td>
+        <td class="${classe}">1.35</td>
+        <td class="${classe}">PUT</td>
+        <td class="${classe}">${s}</td>
+        <td class="${classe}">CALL</td>
+        <td class="${classe}">1.30</td>
+        <td class="${classe}">1.45</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("gradeOpcoes").style.display = "block";
+}
+
+function limparBotoes(container){
+  [...container.children].forEach(b=>b.classList.remove("active"));
+}
+
