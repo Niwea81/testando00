@@ -394,5 +394,75 @@ function mostrarExemplo(tipo) {
   box.innerHTML = exemplos[tipo] || "Exemplo não encontrado";
 }
 
+function c7_mostrar(tipo) {
+  var box = document.getElementById("c7_resultado");
+  if (!box) return;
+
+  var conteudo = "";
+
+  if (tipo === "call") {
+    conteudo = `
+      📈 <b>Call Comprada</b><br><br>
+      • Strike: ATM ou levemente OTM<br>
+      • Tempo: curto a médio prazo<br>
+      • Risco: limitado ao prêmio pago<br>
+      • Ideal quando espera <b>alta forte</b>
+    `;
+  }
+
+  if (tipo === "put") {
+    conteudo = `
+      📉 <b>Put Comprada</b><br><br>
+      • Strike: ATM ou OTM<br>
+      • Tempo: curto prazo<br>
+      • Risco: limitado ao prêmio<br>
+      • Usada em <b>queda ou proteção</b>
+    `;
+  }
+
+  if (tipo === "bull") {
+    conteudo = `
+      📈 <b>Bull Spread</b><br><br>
+      • Compra Call ATM<br>
+      • Venda Call OTM<br>
+      • Risco e ganho limitados<br>
+      • Ideal para <b>alta moderada</b>
+    `;
+  }
+
+  if (tipo === "bear") {
+    conteudo = `
+      📉 <b>Bear Spread</b><br><br>
+      • Compra Put ATM<br>
+      • Venda Put OTM<br>
+      • Risco controlado<br>
+      • Expectativa de <b>queda moderada</b>
+    `;
+  }
+
+  if (tipo === "credit") {
+    conteudo = `
+      🟨 <b>Spread de Crédito</b><br><br>
+      • Venda opção OTM<br>
+      • Compra proteção mais distante<br>
+      • Probabilidade maior<br>
+      • Requer atenção à <b>margem</b>
+    `;
+  }
+
+  if (tipo === "neutral") {
+    conteudo = `
+      🔵 <b>Estrutura Neutra</b><br><br>
+      • Mercado lateral<br>
+      • Foco em tempo e volatilidade<br>
+      • Ex: Iron Condor, Butterfly<br>
+      • Risco sempre <b>definido</b>
+    `;
+  }
+
+  box.innerHTML = conteudo;
+  box.style.display = "block";
+}
+
 
 
