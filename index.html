@@ -281,20 +281,29 @@
 
 </section>
 
-<div class="section" id="camada7-strike">
+<!-- ===== CAMADA 7 — STRIKE, TEMPO E RISCO (BLOCO ISOLADO) ===== -->
+<div class="section" id="camada7">
+
   <h2>7️⃣ Strike, tempo e risco</h2>
 
+  <p style="color:#94a3b8;font-size:15px">
+    🧠 Aqui você vê <b>como as estruturas aparecem na grade real de opções</b>.
+    <br>Exemplo educacional, não recomendação.
+  </p>
+
   <div class="options small">
-    <button class="option-btn" onclick="mostrarExemplo('call')">Call comprada</button>
-    <button class="option-btn" onclick="mostrarExemplo('put')">Put comprada</button>
-    <button class="option-btn" onclick="mostrarExemplo('bull')">Bull Spread</button>
-    <button class="option-btn" onclick="mostrarExemplo('bear')">Bear Spread</button>
-    <button class="option-btn" onclick="mostrarExemplo('credit')">Spread de Crédito</button>
-    <button class="option-btn" onclick="mostrarExemplo('neutral')">Estrutura Neutra</button>
+    <button class="option-btn" onclick="c7_mostrar('call')">Call comprada</button>
+    <button class="option-btn" onclick="c7_mostrar('put')">Put comprada</button>
+    <button class="option-btn" onclick="c7_mostrar('bull')">Bull Spread</button>
+    <button class="option-btn" onclick="c7_mostrar('bear')">Bear Spread</button>
+    <button class="option-btn" onclick="c7_mostrar('credit')">Spread de Crédito</button>
+    <button class="option-btn" onclick="c7_mostrar('neutral')">Estrutura Neutra</button>
   </div>
 
-  <div id="exemplo-grade" class="note" style="display:none;margin-top:15px"></div>
+  <div id="c7_resultado" class="note" style="display:none;margin-top:18px"></div>
+
 </div>
+
 
 
 </body>
