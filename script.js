@@ -463,6 +463,6 @@ function c7_mostrar(tipo) {
   box.innerHTML = conteudo;
   box.style.display = "block";
 }
-});
+
 
 
