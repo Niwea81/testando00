@@ -377,4 +377,22 @@ function decisaoBase(btn, tipo) {
 
 });
 
+function mostrarExemplo(tipo) {
+  const box = document.getElementById("exemplo-grade");
+  if (!box) return;
+
+  const exemplos = {
+    call: "📈 Call comprada<br>Compra de call ATM/OTM com risco limitado ao prêmio.",
+    put: "📉 Put comprada<br>Proteção ou aposta direcional de queda.",
+    bull: "📈 Bull Spread<br>Compra call + venda call OTM.",
+    bear: "📉 Bear Spread<br>Compra put + venda put OTM.",
+    credit: "🟨 Spread de Crédito<br>Venda OTM com proteção.",
+    neutral: "🔵 Estrutura Neutra<br>Foco em lateralidade."
+  };
+
+  box.style.display = "block";
+  box.innerHTML = exemplos[tipo] || "Exemplo não encontrado";
+}
+
+
 
