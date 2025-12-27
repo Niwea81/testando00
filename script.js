@@ -291,3 +291,28 @@ function decisaoBase(btn, tipo) {
   box.style.display = "block";
   box.innerHTML = alerta;
 }
+
+// ================= CAMADA 6 — BLOCO INDEPENDENTE =================
+
+(() => {
+  const camada6 = document.getElementById("camada6-estrutura");
+  if (!camada6) return;
+
+  const botoes = camada6.querySelectorAll(".option-btn");
+  const feedback = camada6.querySelector(".feedback");
+
+  botoes.forEach(btn => {
+    btn.addEventListener("click", () => {
+      // ativa visualmente sem afetar outras camadas
+      btn.classList.toggle("active");
+
+      if (feedback) {
+        feedback.style.display = "block";
+        feedback.innerHTML = `
+          ✅ <b>${btn.innerText}</b> marcada como compatível.<br>
+          📌 Lembrete: estrutura é consequência, não decisão final.
+        `;
+      }
+    });
+  });
+})();
