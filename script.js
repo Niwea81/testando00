@@ -464,5 +464,5 @@ function c7_mostrar(tipo) {
   box.style.display = "block";
 }
 
-
+})();
 
