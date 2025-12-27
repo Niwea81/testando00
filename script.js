@@ -490,6 +490,22 @@ function mostrarExemplo(tipo) {
   box.style.display = "block";
 }
 
+  function mostrarImagem(tipo) {
+  const imagens = {
+    call: "img/call_comprada.png",
+    put: "img/put_comprada.png",
+    bull: "img/bull_spread.png",
+    bear: "img/bear_spread.png",
+    credito: "img/spread_credito.png"
+  };
+
+  const img = document.getElementById("imgOpcao");
+  const box = document.getElementById("visualOpcao");
+
+  img.src = imagens[tipo];
+  box.style.display = "block";
+}
+
 
 })();
 
