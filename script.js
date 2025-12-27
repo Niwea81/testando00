@@ -505,6 +505,44 @@ function mostrarExemplo(tipo) {
   img.src = imagens[tipo];
   box.style.display = "block";
 }
+function mostrarImagem(tipo) {
+  const img = document.getElementById("imgOpcao");
+  const box = document.getElementById("imagemEstrutura");
+  const desc = document.getElementById("descricaoImg");
+
+  const dados = {
+    call: {
+      src: "img/call_comprada.png",
+      texto: "Exemplo educacional de Call comprada (direito de compra)."
+    },
+    put: {
+      src: "img/put_comprada.png",
+      texto: "Exemplo educacional de Put comprada (proteção ou queda)."
+    },
+    bull: {
+      src: "img/bull_spread.png",
+      texto: "Bull Spread: compra e venda de calls para limitar risco."
+    },
+    bear: {
+      src: "img/bear_spread.png",
+      texto: "Bear Spread: estrutura para queda com risco controlado."
+    },
+    credito: {
+      src: "img/spread_credito.png",
+      texto: "Spread de crédito: ganho vem do tempo e probabilidade."
+    },
+    neutra: {
+      src: "img/estrutura_neutra.png",
+      texto: "Estrutura neutra: preço esperado dentro de um range."
+    }
+  };
+
+  if (!dados[tipo]) return;
+
+  img.src = dados[tipo].src;
+  desc.innerText = dados[tipo].texto;
+  box.style.display = "block";
+}
 
 
 })();
