@@ -153,3 +153,57 @@ button:hover {
 .itm{background:#14532d}
 .atm{background:#713f12}
 .otm{background:#1e3a8a}
+
+.option-grid{
+  display:grid;
+  grid-template-columns: 1.3fr 0.6fr 1.3fr;
+  gap:8px;
+  margin-top:15px;
+  font-size:13px;
+}
+
+.side{
+  background:#020617;
+  border:1px solid #1e293b;
+  border-radius:12px;
+  padding:10px;
+}
+
+.header{
+  text-align:center;
+  font-weight:bold;
+  color:#e5e7eb;
+  margin-bottom:6px;
+}
+
+.row-labels{
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  color:#94a3b8;
+  font-size:12px;
+  margin-bottom:4px;
+}
+
+.option-row{
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  padding:6px 4px;
+  margin-bottom:3px;
+  border-radius:6px;
+}
+
+.strike-row{
+  text-align:center;
+  padding:8px 4px;
+  margin-bottom:3px;
+  border-radius:6px;
+  font-weight:bold;
+}
+
+/* Moneyness */
+.itm{ background:#052e16; }
+.atm{ background:#713f12; }
+.otm{ background:#0f172a; }
+
+.calls .option-row{ color:#22c55e; }
+.puts .option-row{ color:#f87171; }
