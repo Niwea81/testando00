@@ -129,3 +129,27 @@ button:hover {
   border-color: #22c55e;
   background: #020024;
 }
+
+.options.small .option-btn{
+  padding:10px 14px;
+  font-size:14px;
+  border-radius:10px;
+}
+
+.option-chain{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+  font-size:14px;
+}
+
+.option-chain th,
+.option-chain td{
+  border:1px solid #1e293b;
+  padding:8px;
+  text-align:center;
+}
+
+.itm{background:#14532d}
+.atm{background:#713f12}
+.otm{background:#1e3a8a}
