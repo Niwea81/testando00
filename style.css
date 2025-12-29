@@ -1,325 +1,76 @@
 /* ===============================
-   THEME — Probability Calculator
-   Apenas aparência (SAFE MODE)
-================================ */
-
-/* Paleta base */
-:root {
-  --bg-main: #0b1220;
-  --bg-card: linear-gradient(180deg, #121a2f, #0d1426);
-  --bg-soft: #10192e;
-
-  --primary: #38bdf8;
-  --primary-soft: rgba(56,189,248,0.15);
-
-  --success: #22c55e;
-  --warning: #facc15;
-  --danger: #ef4444;
-
-  --text-main: #e5e7eb;
-  --text-soft: #94a3b8;
-
-  --radius: 14px;
-  --radius-sm: 10px;
-}
-
-/* Fundo geral */
-body {
-  background: radial-gradient(circle at top, #111a30, #070b18);
-  color: var(--text-main);
-}
-
-/* Seções / Cards */
-.section {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 22px;
-  margin-bottom: 28px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.04);
-}
-
-/* Títulos */
-.section h2,
-.section h3 {
-  color: #f8fafc;
-}
-
-/* Textos auxiliares */
-p,
-.note,
-.guided {
-  color: var(--text-soft);
-}
-
-/* Boxes educativos */
-.guided,
-.note {
-  background: rgba(255,255,255,0.03);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  margin-top: 14px;
-  border-left: 3px solid var(--primary);
-}
-
-/* ===============================
-   BOTÕES
-================================ */
-
-.options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.options.small {
-  gap: 10px;
-}
-
-.option-btn {
-  background: var(--bg-soft);
-  color: var(--text-main);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  border: 1px solid rgba(255,255,255,0.06);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: inset 0 0 0 transparent;
-}
-
-.option-btn span {
-  display: block;
-  font-size: 13px;
-  color: var(--text-soft);
-  margin-top: 4px;
-}
-
-/* Hover */
-.option-btn:hover {
-  transform: translateY(-1px);
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px var(--primary-soft);
-}
-
-/* Ativo */
-.option-btn.active {
-  background: linear-gradient(
-    180deg,
-    rgba(56,189,248,0.25),
-    rgba(56,189,248,0.08)
-  );
-  border-color: var(--primary);
-  color: #f8fafc;
-  box-shadow:
-    0 0 0 2px var(--primary-soft),
-    0 8px 20px rgba(56,189,248,0.15);
-}
-
-/* ===============================
-   INPUTS
-================================ */
-
-select,
-input[type="range"] {
-  background: var(--bg-soft);
-  color: var(--text-main);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 8px;
-}
-
-/* Range slider */
-input[type="range"] {
-  accent-color: var(--primary);
-}
-
-/* ===============================
-   IFRAMES (TradingView)
-================================ */
-
-iframe {
-  background: #020617;
-  border-radius: var(--radius);
-}
-
-/* ===============================
-   TABELAS / GRADES (se houver)
-================================ */
-
-table {
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-th {
-  background: rgba(255,255,255,0.04);
-  color: #e5e7eb;
-}
-
-td {
-  background: rgba(255,255,255,0.02);
-  color: var(--text-soft);
-}
-
-/* ===============================
-   Moneyness (educacional)
-================================ */
-
-.itm {
-  background: rgba(34,197,94,0.15);
-  color: #bbf7d0;
-}
-
-.atm {
-  background: rgba(250,204,21,0.18);
-  color: #fde68a;
-}
-
-.otm {
-  background: rgba(56,189,248,0.15);
-  color: #bae6fd;
-}
-
-/* ===============================
-   🎯 REFINO VISUAL — PROBABILITY CALCULATOR
+   🎨 PALETA PROBABILITY CALCULATOR
+   Lilás + Azul Turquesa
    =============================== */
 
 :root {
-  --bg-main: radial-gradient(circle at top, #121826 0%, #0b0f1a 60%);
-  --card-bg: linear-gradient(180deg, #141b2d, #0f1424);
-  --card-border: rgba(255,255,255,0.06);
+  --accent: linear-gradient(135deg, #7f7cff, #4ddfd3);
+  --accent-lilac: #7f7cff;
+  --accent-turq: #4ddfd3;
 
-  --text-main: #e5e9f0;
-  --text-soft: #9aa4bf;
-
-  --accent: #4da3ff;
-  --accent-soft: rgba(77,163,255,0.15);
-
-  --danger: #ff6b6b;
-  --success: #5dd39e;
+  --accent-glow: rgba(127,124,255,0.25);
+  --accent-glow-soft: rgba(77,223,211,0.18);
 }
 
-/* ===== FUNDO GERAL ===== */
-body {
-  background: var(--bg-main);
-  color: var(--text-main);
-  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-}
-
-/* ===== SEÇÕES / CAMADAS ===== */
-.section {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 18px;
-  padding: 22px 24px;
-  margin-bottom: 24px;
-
-  box-shadow:
-    0 8px 24px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.03);
-}
-
-/* ===== TÍTULOS ===== */
+/* ===== TÍTULOS COM IDENTIDADE ===== */
 .section h2 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  margin-bottom: 14px;
-  color: #ffffff;
+  background: linear-gradient(90deg, #9b97ff, #5fe6dc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.section h3 {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-soft);
-  margin-top: 18px;
-}
-
-/* ===== TEXTOS ===== */
-.section p,
-.section li {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: var(--text-soft);
-}
-
-/* ===== BOTÕES (PADRÃO CALCULADORA) ===== */
+/* ===== BOTÕES — PROBABILITY STYLE ===== */
 button,
 .option-btn {
-  background: linear-gradient(180deg, #1c243b, #141a2e);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  padding: 10px 14px;
-
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-main);
-
-  cursor: pointer;
-  transition: all 0.18s ease;
+  background: linear-gradient(
+    180deg,
+    rgba(127,124,255,0.15),
+    rgba(77,223,211,0.12)
+  );
+  border: 1px solid rgba(127,124,255,0.35);
 }
 
 button:hover,
 .option-btn:hover {
-  background: linear-gradient(180deg, #233055, #182041);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent-soft);
+  border-color: #5fe6dc;
+  box-shadow:
+    0 0 0 1px rgba(127,124,255,0.35),
+    0 0 12px rgba(77,223,211,0.25);
 }
 
-button:active,
-.option-btn:active {
-  transform: translateY(1px);
-}
-
-/* ===== GRUPOS DE OPÇÕES ===== */
-.options.small {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* ===== DESTAQUE DE ESCOLHA ===== */
+/* ===== BOTÃO ATIVO ===== */
 .option-btn.active {
-  background: linear-gradient(180deg, #2b6cb0, #1e4e8c);
-  border-color: #5fa8ff;
-  color: #ffffff;
+  background: linear-gradient(135deg, #7f7cff, #4ddfd3);
+  color: #0b0f1a;
+  font-weight: 600;
+  box-shadow:
+    0 0 14px rgba(127,124,255,0.55),
+    0 0 22px rgba(77,223,211,0.35);
 }
 
-/* ===== BLOCOS EDUCACIONAIS ===== */
-.educational-box {
-  background: rgba(255,255,255,0.03);
-  border: 1px dashed rgba(255,255,255,0.12);
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-top: 16px;
-  font-size: 0.82rem;
-  color: var(--text-soft);
-}
-
-/* ===== ALERTAS ===== */
-.alert-danger {
-  border-left: 4px solid var(--danger);
-  padding-left: 12px;
-}
-
-.alert-success {
-  border-left: 4px solid var(--success);
-  padding-left: 12px;
-}
-
-/* ===== TRANSIÇÃO SUAVE ENTRE CAMADAS ===== */
+/* ===== CARDS MAIS "MATEMÁTICOS" ===== */
 .section {
-  animation: fadeUp 0.4s ease both;
+  border: 1px solid rgba(127,124,255,0.25);
+  box-shadow:
+    0 10px 28px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(127,124,255,0.05);
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ===== CAIXAS EDUCACIONAIS ===== */
+.educational-box {
+  border: 1px solid rgba(77,223,211,0.35);
+  background: linear-gradient(
+    135deg,
+    rgba(127,124,255,0.08),
+    rgba(77,223,211,0.06)
+  );
 }
 
+/* ===== ALERTAS COM IDENTIDADE ===== */
+.alert-success {
+  border-left: 4px solid #4ddfd3;
+}
+
+.alert-danger {
+  border-left: 4px solid #7f7cff;
+}
