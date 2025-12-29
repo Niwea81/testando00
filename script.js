@@ -583,6 +583,92 @@ function mostrarImagem(tipo) {
   box.style.display = "block";
 }
 
+  // ================= CAMADA 7 — STRIKE, TEMPO E RISCO =================
+
+let strikeEscolhido = null;
+let riscoEscolhido = null;
+
+function selecionarStrike(tipo) {
+  strikeEscolhido = tipo;
+
+  const box = document.getElementById("feedbackStrike");
+  box.style.display = "block";
+
+  if (tipo === "itm") {
+    box.innerHTML = `
+      🟢 <b>ITM — Conservador</b><br>
+      • Mais caro<br>
+      • Maior probabilidade (POP)<br>
+      • Menos estresse emocional
+    `;
+  }
+
+  if (tipo === "atm") {
+    box.innerHTML = `
+      🟡 <b>ATM — Equilíbrio</b><br>
+      • Custo moderado<br>
+      • Boa relação risco/retorno
+    `;
+  }
+
+  if (tipo === "otm") {
+    box.innerHTML = `
+      🔵 <b>OTM — Agressivo</b><br>
+      • Mais barato<br>
+      • Menor probabilidade<br>
+      • Exige disciplina emocional
+    `;
+  }
+
+  verificarDecisaoFinal();
+}
+
+function avaliarRisco(tipo) {
+  riscoEscolhido = tipo;
+
+  const box = document.getElementById("feedbackRisco");
+  box.style.display = "block";
+
+  if (tipo === "aceitavel") {
+    box.innerHTML = `
+      ✔️ <b>Risco consciente</b><br>
+      • Perda máxima clara<br>
+      • Trade compatível com seu emocional
+    `;
+  }
+
+  if (tipo === "alto") {
+    box.innerHTML = `
+      ❌ <b>Risco elevado</b><br>
+      • Pode gerar estresse<br>
+      • Reavalie antes de operar
+    `;
+  }
+
+  verificarDecisaoFinal();
+}
+
+function verificarDecisaoFinal() {
+  if (!strikeEscolhido || !riscoEscolhido) return;
+
+  const box = document.getElementById("decisaoFinal");
+  box.style.display = "block";
+
+  if (riscoEscolhido === "aceitavel") {
+    box.innerHTML = `
+      ✅ <b>Trade aceito</b><br>
+      POP estimada ≥ 70%<br>
+      Estrutura compatível com sua expectativa
+    `;
+  } else {
+    box.innerHTML = `
+      🚫 <b>Trade recusado</b><br>
+      O pior cenário não é aceitável para você
+    `;
+  }
+}
+
+
 })();
 
 
