@@ -179,3 +179,147 @@ td {
   background: rgba(56,189,248,0.15);
   color: #bae6fd;
 }
+
+/* ===============================
+   🎯 REFINO VISUAL — PROBABILITY CALCULATOR
+   =============================== */
+
+:root {
+  --bg-main: radial-gradient(circle at top, #121826 0%, #0b0f1a 60%);
+  --card-bg: linear-gradient(180deg, #141b2d, #0f1424);
+  --card-border: rgba(255,255,255,0.06);
+
+  --text-main: #e5e9f0;
+  --text-soft: #9aa4bf;
+
+  --accent: #4da3ff;
+  --accent-soft: rgba(77,163,255,0.15);
+
+  --danger: #ff6b6b;
+  --success: #5dd39e;
+}
+
+/* ===== FUNDO GERAL ===== */
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+/* ===== SEÇÕES / CAMADAS ===== */
+.section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* ===== TÍTULOS ===== */
+.section h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+
+.section h3 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  margin-top: 18px;
+}
+
+/* ===== TEXTOS ===== */
+.section p,
+.section li {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+/* ===== BOTÕES (PADRÃO CALCULADORA) ===== */
+button,
+.option-btn {
+  background: linear-gradient(180deg, #1c243b, #141a2e);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-main);
+
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+button:hover,
+.option-btn:hover {
+  background: linear-gradient(180deg, #233055, #182041);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
+
+button:active,
+.option-btn:active {
+  transform: translateY(1px);
+}
+
+/* ===== GRUPOS DE OPÇÕES ===== */
+.options.small {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ===== DESTAQUE DE ESCOLHA ===== */
+.option-btn.active {
+  background: linear-gradient(180deg, #2b6cb0, #1e4e8c);
+  border-color: #5fa8ff;
+  color: #ffffff;
+}
+
+/* ===== BLOCOS EDUCACIONAIS ===== */
+.educational-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+/* ===== ALERTAS ===== */
+.alert-danger {
+  border-left: 4px solid var(--danger);
+  padding-left: 12px;
+}
+
+.alert-success {
+  border-left: 4px solid var(--success);
+  padding-left: 12px;
+}
+
+/* ===== TRANSIÇÃO SUAVE ENTRE CAMADAS ===== */
+.section {
+  animation: fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
