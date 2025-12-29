@@ -311,6 +311,54 @@
   </div>
 </div>
 
+<!-- ================= CAMADA 7 — STRIKE, RISCO E DECISÃO ================= -->
+
+<div class="section" id="camada7">
+  <h2>7️⃣ Strike, Risco e Decisão</h2>
+
+  <!-- DEFINIÇÃO DE STRIKE -->
+  <h3>🎯 Definição de Strikes (Moneyness)</h3>
+
+  <p class="helper">
+    🧠 <b>Pergunta profissional:</b><br>
+    “Quão agressivo eu quero ser?”
+  </p>
+
+  <div class="options small">
+    <button class="option-btn" onclick="selecionarStrike('itm')">ITM</button>
+    <button class="option-btn" onclick="selecionarStrike('atm')">ATM</button>
+    <button class="option-btn" onclick="selecionarStrike('otm')">OTM</button>
+  </div>
+
+  <div id="feedbackStrike" class="guided" style="display:none"></div>
+
+  <!-- RISCO X RETORNO -->
+  <div id="blocoRisco" style="display:none;margin-top:30px">
+    <h3>⚖️ Risco x Retorno — Realidade nua e crua</h3>
+
+    <p class="helper">
+      🧠 <b>Pergunta profissional:</b><br>
+      “O pior cenário é aceitável?”
+    </p>
+
+    <div class="options small">
+      <button class="option-btn" onclick="avaliarRisco('aceitavel')">
+        👍 Sim, é aceitável
+      </button>
+      <button class="option-btn" onclick="avaliarRisco('desconfortavel')">
+        ⚠️ Não, me incomoda
+      </button>
+    </div>
+
+    <div id="feedbackRisco" class="guided" style="display:none"></div>
+  </div>
+
+  <!-- DECISÃO FINAL -->
+  <div id="decisaoFinal" style="display:none;margin-top:30px">
+    <h3>✅ Decisão Final</h3>
+    <div id="resultadoFinal" class="note"></div>
+  </div>
+</div>
 
 </body>
 </html>
